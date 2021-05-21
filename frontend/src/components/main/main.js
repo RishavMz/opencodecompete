@@ -31,11 +31,18 @@ class Main extends Component {
         console.log(this.state)
     }
 
+    gameOver = (key) => {
+        if(key === true) {
+            this.setState({game: false});
+            this.setState({lobby: true});
+        }
+    }
+
     render() { 
 
         const loggedOutState = <div>You have not logged In</div>;
-        const loggedInState = <div>You are in logged in and in lobby <Lobby matched = {this.lobbier.bind(this)}/></div>;
-        const gamestate =  <div>You are logged in and in game <Game/></div>;
+        const loggedInState = <div>Waiting for players:<Lobby matched = {this.lobbier.bind(this)}/></div>;
+        const gamestate =  <div>You are logged in and in game <Game gameover = {this.gameOver.bind(this)}/></div>;
 
         let output = "";
 
