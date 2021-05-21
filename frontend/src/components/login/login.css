@@ -1,0 +1,42 @@
+.navbar{
+    background-color: rgb(8, 241, 164);
+    color: white;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    font-size: 14pt;
+    align-items: right;
+    justify-items: right;
+    height: 30px;
+}
+label{
+    margin-left: 30px;
+    margin-right: 10px;
+}
+input{
+    margin-right: 30px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+}
+.login {
+    position: absolute;
+    right: 100px;
+    top: 15px;
+}
+.loginbutton {
+    background-color: rgb(8, 241, 164);
+    border-radius: 20px;
+    padding: 10px 15px 10px 15px;
+    border: 2px solid white;
+    color: white;
+    font-weight: bold;
+    border-top: 5px solid white;
+    border-bottom: 5px solid white;
+}
+.loginbutton:hover{
+    background-color: rgb(60, 241, 181);
+    border-top: 5px solid rgb(60, 241, 181);
+    border-bottom: 5px solid rgb(60, 241, 181);
+}
