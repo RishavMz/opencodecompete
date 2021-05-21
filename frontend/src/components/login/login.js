@@ -37,7 +37,6 @@ class Login extends Component {
         key.preventDefault();
         this.setState({loggedIn: false});
         this.props.loggedIn(false);
-        console.log(this.state.loggedIn);
     }
 
     changeHandler = (key) => {

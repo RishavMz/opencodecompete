@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from "axios";
+import './game.css';
 
 class Game extends Component {
     constructor() {
@@ -8,12 +10,14 @@ class Game extends Component {
 
         this.state = {
             stop: false,
-            positions: {}
+            positions: []
         }
-
     }
 
     componentDidMount(){
+        axios.get("http://localhost:5000/position/all").then((res) =>{
+            this.setState({positions:res.data});
+        });
 
     }
 
@@ -23,10 +27,18 @@ class Game extends Component {
     }    
     
     render() { 
+
         return ( <div>This is the game
             <form onClick = {this.handleStop}>
-                <button className = "startbutton" type = "submit" >EXIT GAME</button>
+                <button className = "exitgamebutton" type = "submit" >EXIT GAME</button>
             </form> 
+
+            <div className = "battleground">
+                {this.state.positions.map((key) => <div>
+                    {<div className = "player" style={{top: key[1] , left: key[2]}}>
+                    </div>}    
+                </div>)}
+            </div>
         </div> );
     }
 }

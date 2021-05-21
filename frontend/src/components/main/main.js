@@ -20,7 +20,6 @@ class Main extends Component {
         if(key === true) {
             this.setState({lobby:true});
         }
-        console.log(this.state)
     }
 
     lobbier = (key) => {
@@ -28,7 +27,6 @@ class Main extends Component {
             this.setState({game:true});
             this.setState({lobby:false});
         }
-        console.log(this.state)
     }
 
     gameOver = (key) => {
