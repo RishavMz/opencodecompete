@@ -40,7 +40,7 @@ class Main extends Component {
 
         const loggedOutState = <div>You have not logged In</div>;
         const loggedInState = <div>Waiting for players:<Lobby matched = {this.lobbier.bind(this)}/></div>;
-        const gamestate =  <div>You are logged in and in game <Game gameover = {this.gameOver.bind(this)}/></div>;
+        const gamestate =  <div><Game gameover = {this.gameOver.bind(this)}/></div>;
 
         let output = "";
 
