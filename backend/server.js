@@ -1,23 +1,48 @@
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+const uuid = require("uuid").v4;
+const session = require("express-session");
+const redis = require("ioredis");
 require("dotenv").config();
+const bodyParser = require("body-parser");
+const redisClient = new redis(process.env.REDIS_URL);
+const redisStore = require('connect-redis')(session);
+
+
+
 
 // ================ Setup =====================
 
 const app = express();
+
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
     credentials: true,
 }));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+redisClient.on('error', (err) => {
+    console.log('Redis error: ', err);
+  });
+  
+app.use(session({
+    genid: (req) =>{
+      return uuid();  },
+    secret: process.env.SECRETKEY,
+    resave: false,
+    saveUninitialized: true,
+    store: new redisStore({
+        client: redisClient, 
+        ttl: 86400 }),
+  }));
 
 // ================= Routes ===================
 
 const positionRoute = require("./routes/position");
+const authRoute = require("./routes/auth"); 
 
 
 app.get("/", (req, res) =>{
@@ -25,6 +50,7 @@ app.get("/", (req, res) =>{
 });
 
 app.use("/position", positionRoute);
+app.use("/auth", authRoute);
 
 // ================= Server ===================
 
