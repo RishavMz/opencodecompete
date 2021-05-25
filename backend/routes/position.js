@@ -12,7 +12,8 @@ data = [
 // ================= Routes ===================
 
 router.get("/all", (req, res) => {
-    res.json(data)
+    res.json(data);
+    console.log(req.session.userID);
 });
 
 module.exports = router;

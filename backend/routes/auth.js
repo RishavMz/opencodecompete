@@ -22,9 +22,14 @@ router.get("/remember", (req, res) => {
 router.post("/remember", async (req, res) => {
 
     // Verify cookie data from the login cookie data stored in redis cache
-    await redisClient.sismember("SESSIONS", req.body.username, (error, reply) => {
+    await redisClient.sismember("SESSIONS", req.body.username,  async(error, reply) => {
         if(reply === 1){
             res.send("200LoggedIn");
+                await conn.query("SELECT ID FROM USERS WHERE NAME = $1 ", [req.body.username ])
+                .then(async (res) => {
+                    req.session.userID = res.rows[0].id;
+                })
+                .catch(err => setImmediate(() => {   throw err }));
         } else {
             res.send("404NotFound");
         }
@@ -76,7 +81,7 @@ router.post("/login", async (req, res) => {
        
         var auth = 0;
 
-       await conn.query("SELECT PASSWORD FROM USERS WHERE NAME = $1 ", [req.body.username ])
+       await conn.query("SELECT PASSWORD, ID FROM USERS WHERE NAME = $1 ", [req.body.username ])
         .then(async (res) => {
 
               var hash = res.rows[0];
@@ -88,7 +93,7 @@ router.post("/login", async (req, res) => {
                 hash = hash.password;
                 await bcrypt.compare(req.body.password, hash).then( (result) => {
                 if(result){
-
+                    req.session.userID = res.rows[0].id;
                     auth = 2;
                 }
             });
@@ -114,6 +119,7 @@ router.post("/login", async (req, res) => {
       } else {
           res.send("403IncorrectPassword");
       }
+      console.log("userid: ",req.session.userID);
     }
       
 });
