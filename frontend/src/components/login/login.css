@@ -11,14 +11,16 @@
     justify-items: right;
     height: 30px;
 }
-label{
+.signinLabel{
     margin-left: 30px;
     margin-right: 10px;
 }
-input{
+.logininput{
     margin-right: 30px;
     padding: 5px 5px 5px 5px;
     border-radius: 10px;
+    border: 1px solid transparent;
+    outline: none;
 }
 .login {
     position: absolute;
@@ -26,17 +28,17 @@ input{
     top: 15px;
 }
 .loginbutton {
-    background-color: rgb(8, 241, 164);
+    background-color: white;
     border-radius: 20px;
-    padding: 10px 15px 10px 15px;
-    border: 2px solid white;
-    color: white;
+    padding: 8px 15px 8px 15px;
+    border: 2px solid transparent;
+    color: rgb(8, 241, 164);
     font-weight: bold;
-    border-top: 5px solid white;
-    border-bottom: 5px solid white;
+
 }
 .loginbutton:hover{
     background-color: rgb(60, 241, 181);
-    border-top: 5px solid rgb(60, 241, 181);
-    border-bottom: 5px solid rgb(60, 241, 181);
+    color: white;
+    cursor: pointer;
+
 }

@@ -25,7 +25,7 @@ router.post("/remember", async (req, res) => {
     await redisClient.sismember("SESSIONS", req.body.username,  async(error, reply) => {
         if(reply === 1){
             res.send("200LoggedIn");
-                await conn.query("SELECT ID FROM USERS WHERE NAME = $1 ", [req.body.username ])
+                await conn.query("SELECT ID FROM USERS WHERE USERNAME = $1 ", [req.body.username ])
                 .then(async (res) => {
                     req.session.userID = res.rows[0].id;
                 })
@@ -43,7 +43,7 @@ router.post("/remember", async (req, res) => {
 
 
 router.post("/signup", async (req, res) => {
-    if(!req.body.username || !req.body.password){
+    if(!req.body.username || !req.body.password || !req.body.email){
         res.send("403No Data");
         
      } else {
@@ -53,7 +53,7 @@ router.post("/signup", async (req, res) => {
             hashed = hash;  
         }).then(async ()=> {
 
-            await conn.query("INSERT INTO USERS (NAME, PASSWORD) VALUES ( $1 , $2)" , [ req.body.username, hashed ])
+            await conn.query("INSERT INTO USERS (USERNAME, EMAIL, PASSWORD) VALUES ( $1 , $2, $3)" , [ req.body.username, req.body.email, hashed ])
             .then(async() => {
 
                 res.status("201")
@@ -81,7 +81,7 @@ router.post("/login", async (req, res) => {
        
         var auth = 0;
 
-       await conn.query("SELECT PASSWORD, ID FROM USERS WHERE NAME = $1 ", [req.body.username ])
+       await conn.query("SELECT PASSWORD, ID FROM USERS WHERE USERNAME = $1 ", [req.body.username ])
         .then(async (res) => {
 
               var hash = res.rows[0];
@@ -119,7 +119,6 @@ router.post("/login", async (req, res) => {
       } else {
           res.send("403IncorrectPassword");
       }
-      console.log("userid: ",req.session.userID);
     }
       
 });

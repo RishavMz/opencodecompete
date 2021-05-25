@@ -100,7 +100,10 @@ class Login extends Component {
 
     handleLogIn = (key) => {
         key.preventDefault();
-        console.log(this.state)
+        if(this.state.username === "" || this.state.password === ""){
+            alert("Username or password cannot be empty");
+            return;
+        }
         // Try to log in
         axios.post(`http://127.0.0.1:5000/auth/login`,
         {
@@ -174,12 +177,12 @@ class Login extends Component {
         if(this.state.loggedIn === false) {
             output = <div className = "login" >
                 <form onSubmit = {this.handleLogIn}>
-                <label >Username</label>
-                <input type = "text" name = "username"  onChange = {this.changeHandler } value = {this.state.username}/>
-                <label >Password</label>
-                <input type = "password" name = "password"  onChange = {this.changeHandler} value = {this.state.password}/>
-                <label >Remember Me</label>
-                <input type = "checkbox" name = "remember" checked={this.state.is_checked} onChange={this.toggleCheckbox.bind(this)}/>
+                <label className = "signinLabel" >Username</label>
+                <input className = "logininput" type = "text" name = "username"  onChange = {this.changeHandler } value = {this.state.username}/>
+                <label className = "signinLabel" >Password</label>
+                <input className = "logininput" type = "password" name = "password"  onChange = {this.changeHandler} value = {this.state.password}/>
+                <label className = "signinLabel" >Remember Me</label>
+                <input className = "logininput" type = "checkbox" name = "remember" checked={this.state.is_checked} onChange={this.toggleCheckbox.bind(this)}/>
                 <button className = "loginbutton" type="submit">LOG IN</button>
                 </form>
             </div>

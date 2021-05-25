@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from '../login/login';
 import Game from '../game/game';
 import Lobby from '../lobby/lobby';
+import Signup from '../signup/signup';
 
 class Main extends Component {
     
@@ -38,7 +39,7 @@ class Main extends Component {
 
     render() { 
 
-        const loggedOutState = <div>You have not logged In</div>;
+        const loggedOutState = <div><Signup/></div>;
         const loggedInState = <div>Waiting for players:<Lobby matched = {this.lobbier.bind(this)}/></div>;
         const gamestate =  <div><Game gameover = {this.gameOver.bind(this)}/></div>;
 
