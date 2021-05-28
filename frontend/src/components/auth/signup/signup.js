@@ -22,14 +22,14 @@ class Signup extends Component {
 
     // Input validation
     if(this.state.username === "" || this.state.password === "" || this.state.email === "" || this.state.passwordre === ""){
-        alert("You have left a field empty");
+        this.props.message("You have left a field empty");
         return;
     }
 
     // password validation
     if(this.state.password === this.state.passwordre){
     } else {
-        alert("Passwords do not match, please retype passwords carefully");
+        this.props.message("Passwords do not match, please retype passwords correctly");
         return;
     }
 
@@ -44,7 +44,7 @@ class Signup extends Component {
             email: this.state.email 
         }, {withCredentials: true })
     .then(res => {
-        alert("Sign Up Successful");
+        this.props.message("Sign Up Successful");
         this.setState({username:"", email:"", password:"",passwordre:""})
         })
     .catch(error => {

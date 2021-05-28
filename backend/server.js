@@ -41,7 +41,6 @@ app.use(session({
 
 // ================= Routes ===================
 
-const positionRoute = require("./routes/position");
 const authRoute = require("./routes/auth"); 
 
 
@@ -49,7 +48,6 @@ app.get("/", (req, res) =>{
     res.send("Random text go brr....");
 });
 
-app.use("/position", positionRoute);
 app.use("/auth", authRoute);
 
 // ================= Server ===================

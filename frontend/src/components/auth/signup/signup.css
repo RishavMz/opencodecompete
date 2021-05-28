@@ -35,3 +35,10 @@
     width: 180px;
     margin-top: 5px;
 }
+
+@media screen and (max-width: 640px){
+    .signupform{
+        margin-left: 50px;
+    }
+    
+}

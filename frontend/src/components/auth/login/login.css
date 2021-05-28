@@ -1,0 +1,119 @@
+.navbar{
+    background-color: rgb(8, 241, 164);
+    color: white;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    font-size: 14pt;
+    align-items: right;
+    justify-items: right;
+    height: 30px;
+}
+.signinLabel{
+    margin-left: 30px;
+    margin-right: 10px;
+}
+.logininput{
+    margin-right: 30px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    outline: none;
+}
+.login {
+    position: absolute;
+    right: 100px;
+    top: 15px;
+}
+.loginbutton {
+    background-color: white;
+    border-radius: 20px;
+    padding: 8px 15px 8px 15px;
+    border: 2px solid transparent;
+    color: rgb(8, 241, 164);
+    font-weight: bold;
+
+}
+.loginbutton:hover{
+    background-color: rgb(60, 241, 181);
+    color: white;
+    cursor: pointer;
+
+}
+
+.message{
+    background-color: aquamarine;
+    border: 1px solid green;
+    color: green;
+    font-weight: bold;
+    margin: 25px 25px 25px 25px;
+    width: 50%;
+    padding: 15px 15px 15px 15px;
+    border-radius: 25px;
+}
+
+@media screen and (max-width: 640px) {
+    .navbar{
+        height: 250px;
+    }
+
+    .llabel1{
+        position: absolute;
+        top: 10px;
+        left: -180px;
+    }
+    .llabel2{
+        position: absolute;
+        top: 100px;
+        left: -180px;
+    }
+    .linput1{
+        position: absolute;
+        top: 50px;
+        left: -180px;
+    }
+    .linput2{
+        position: absolute;
+        top: 150px;
+        left: -180px;
+    }
+    .loginbutton{
+        margin-top: 200px;
+        position: absolute;
+        left: -150px;
+    }
+
+    
+}
+
+@media screen and (max-width: 1200px) and (min-width: 640px) {
+
+    .llabel1{
+        position: absolute;
+        top: 10px;
+        left: -650px;
+    }
+    .llabel2{
+        position: absolute;
+        top: 10px;
+        left: -350px;
+    }
+    .linput1{
+        position: absolute;
+        top: 10px;
+        left: -500px;
+    }
+    .linput2{
+        position: absolute;
+        top: 10px;
+        left: -200px;
+    }
+    .loginbutton{
+        position: absolute;
+        top: 6px;
+        left: 0px;
+        width: 90px;
+    }
+}

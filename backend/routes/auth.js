@@ -105,12 +105,10 @@ router.post("/login", async (req, res) => {
             console.log("Logged In");
             req.session.username = req.body.username;
 
-            if(req.body.remember === true){
                 // Store data in redis cache for verifying cookies
                 await redisClient.sadd("SESSIONS",req.session.username, (error) =>{
                     if(error) {console.log(error)}
                 });
-            }
             res.send("200"+req.session.username);
 
       } else if(auth === 1){

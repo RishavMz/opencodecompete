@@ -9,13 +9,11 @@ class Login extends Component {
         this.handleLogOut = this.handleLogOut.bind(this);
         this.changeHandler = this.changeHandler.bind(this);
         this.setCookie = this.setCookie.bind(this);
-        this.toggleCheckbox = this.toggleCheckbox.bind(this);
 
         this.state = {
             loggedIn : false ,
             username: "",
             password: "",
-            remember: false
         }
 
     }
@@ -30,19 +28,6 @@ class Login extends Component {
       }
 
     componentDidMount(){
-
-        // Display which server the application is currently using
-        axios.get(`http://127.0.0.1:5000/`,{
-            headers: {
-                'Content-Type': 'application/json'
-           },withCredentials: true  
-        })
-        .then(res => {
-            console.log(res.data);
-        })
-        .catch(error => {
-            console.error(error);
-        })
 
         // Check if session available
         axios.get(`http://127.0.0.1:5000/auth/remember`,{
@@ -85,6 +70,7 @@ class Login extends Component {
                         this.setState({loggedIn : true });
                         console.log(res.data);
                         this.props.loggedIn(true);
+                        
                     }
                     else{
                         console.log(payload);
@@ -101,7 +87,7 @@ class Login extends Component {
     handleLogIn = (key) => {
         key.preventDefault();
         if(this.state.username === "" || this.state.password === ""){
-            alert("Username or password cannot be empty");
+            this.props.message("Username or password cannot be empty");
             return;
         }
         // Try to log in
@@ -112,7 +98,6 @@ class Login extends Component {
             },
             username: this.state.username,
             password: this.state.password,
-            remember: this.state.remember 
         }, {withCredentials: true })
         .then(res => {
             const prefix = res.data.substring(0,3);
@@ -122,13 +107,14 @@ class Login extends Component {
                 // Create the login cookie with value as username
                 this.setCookie("login", res.data, ( 86400*365 ) );
                 this.setState({loggedIn : true });
-                console.log(res.data);
                 this.props.loggedIn(true);
+                this.props.message("Successfully logged In");
+
             }
             else{
                 console.log(payload);
                 this.props.loggedIn(false);
-                alert("Incorrect username and password");
+                this.props.message("Incorrect username or password");
             }
         })
         .catch(error => {
@@ -152,6 +138,8 @@ class Login extends Component {
                 this.setCookie("login", "", 0 );
                 console.log("Logged out");
                 this.props.loggedIn(false);
+                this.props.message("Successfully logged out");
+
             })
         .catch(error => {
             console.error(error);
@@ -165,11 +153,6 @@ class Login extends Component {
         });
     }
 
-    // Handle checkbox
-    toggleCheckbox = (key) => {
-        let value = (this.state.is_checked === "on" || this.state.is_checked === true) ? false : true;
-        this.setState({remember: value});
-      }
 
     render() { 
 
@@ -177,12 +160,10 @@ class Login extends Component {
         if(this.state.loggedIn === false) {
             output = <div className = "login" >
                 <form onSubmit = {this.handleLogIn}>
-                <label className = "signinLabel" >Username</label>
-                <input className = "logininput" type = "text" name = "username"  onChange = {this.changeHandler } value = {this.state.username}/>
-                <label className = "signinLabel" >Password</label>
-                <input className = "logininput" type = "password" name = "password"  onChange = {this.changeHandler} value = {this.state.password}/>
-                <label className = "signinLabel" >Remember Me</label>
-                <input className = "logininput" type = "checkbox" name = "remember" checked={this.state.is_checked} onChange={this.toggleCheckbox.bind(this)}/>
+                <label className = "signinLabel llabel1" >Username</label>
+                <input className = "logininput linput1" type = "text" name = "username"  onChange = {this.changeHandler } value = {this.state.username}/>
+                <label className = "signinLabel llabel2" >Password</label>
+                <input className = "logininput linput2" type = "password" name = "password"  onChange = {this.changeHandler} value = {this.state.password}/>
                 <button className = "loginbutton" type="submit">LOG IN</button>
                 </form>
             </div>
