@@ -1,4 +1,4 @@
-.navbar{
+.loginbar{
     background-color: rgb(8, 241, 164);
     color: white;
     font-weight: bold;
@@ -55,7 +55,7 @@
 }
 
 @media screen and (max-width: 640px) {
-    .navbar{
+    .loginbar{
         height: 250px;
     }
 
@@ -83,6 +83,7 @@
         margin-top: 200px;
         position: absolute;
         left: -150px;
+        width: 100px;
     }
 
     

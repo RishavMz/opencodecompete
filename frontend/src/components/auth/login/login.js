@@ -6,7 +6,6 @@ class Login extends Component {
     constructor() {
         super();
         this.handleLogIn = this.handleLogIn.bind(this);
-        this.handleLogOut = this.handleLogOut.bind(this);
         this.changeHandler = this.changeHandler.bind(this);
         this.setCookie = this.setCookie.bind(this);
 
@@ -14,7 +13,7 @@ class Login extends Component {
             loggedIn : false ,
             username: "",
             password: "",
-        }
+        };
 
     }
     
@@ -27,15 +26,15 @@ class Login extends Component {
         document.cookie = name + "=" + (value || "") + expires + "; path=/;SameSite=Lax";
       }
 
-    componentDidMount(){
+    async componentDidMount(){
 
         // Check if session available
-        axios.get(`http://127.0.0.1:5000/auth/remember`,{
+        await axios.get(`http://127.0.0.1:5000/auth/remember`,{
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
         })
-        .then(res => {
+        .then((res) => {
             const prefix = res.data.substring(0,3);
             const payload = res.data.substring(3);
             if(prefix === "200") {
@@ -48,7 +47,7 @@ class Login extends Component {
                 this.props.loggedIn(false);
             }
         })
-        .catch(error => {
+        .catch((error) => {
             console.error(error);
         })
         if(this.state.loggedIn === false){
@@ -56,14 +55,14 @@ class Login extends Component {
             // If session unavailable, check if valid cookie available
             const loginCookie = document.cookie.substring(document.cookie.indexOf("login=200")+9);
             if(loginCookie){
-                axios.post(`http://127.0.0.1:5000/auth/remember`,
+                await axios.post(`http://127.0.0.1:5000/auth/remember`,
                 {
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     username: loginCookie
                 }, {withCredentials: true })
-                .then(res => {
+                .then((res) => {
                     const prefix = res.data.substring(0,3);
                     const payload = res.data.substring(3);
                     if(prefix === "200") {
@@ -76,7 +75,7 @@ class Login extends Component {
                         console.log(payload);
                     }
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.error(error);
                 });
             }
@@ -84,14 +83,14 @@ class Login extends Component {
     }
 
 
-    handleLogIn = (key) => {
+    handleLogIn = async(key) => {
         key.preventDefault();
         if(this.state.username === "" || this.state.password === ""){
             this.props.message("Username or password cannot be empty");
             return;
         }
         // Try to log in
-        axios.post(`http://127.0.0.1:5000/auth/login`,
+        await axios.post(`http://127.0.0.1:5000/auth/login`,
         {
             headers: {
                  'Content-Type': 'application/json'
@@ -99,7 +98,7 @@ class Login extends Component {
             username: this.state.username,
             password: this.state.password,
         }, {withCredentials: true })
-        .then(res => {
+        .then((res) => {
             const prefix = res.data.substring(0,3);
             const payload = res.data.substring(3);
             if(prefix === "200") {
@@ -108,7 +107,8 @@ class Login extends Component {
                 this.setCookie("login", res.data, ( 86400*365 ) );
                 this.setState({loggedIn : true });
                 this.props.loggedIn(true);
-                this.props.message("Successfully logged In");
+                //this.props.message("Successfully logged In");
+                window.location.reload();
 
             }
             else{
@@ -117,34 +117,11 @@ class Login extends Component {
                 this.props.message("Incorrect username or password");
             }
         })
-        .catch(error => {
+        .catch((error) => {
             console.error(error);
         })
     }
 
-    handleLogOut = (key) => {
-        key.preventDefault();
-
-        // Try to Log out 
-        axios.post(`http://127.0.0.1:5000/auth/logout`,{
-            headers: {
-                'Content-Type': 'application/json'
-           } 
-        }, {withCredentials: true })
-        .then(res => {
-                this.setState({loggedIn : false });
-
-                // Remove the login cookie value
-                this.setCookie("login", "", 0 );
-                console.log("Logged out");
-                this.props.loggedIn(false);
-                this.props.message("Successfully logged out");
-
-            })
-        .catch(error => {
-            console.error(error);
-        })
-    }
 
     // Handle state change for input fields for react
     changeHandler = (key) => {
@@ -155,10 +132,8 @@ class Login extends Component {
 
 
     render() { 
-
-        let output = "";
-        if(this.state.loggedIn === false) {
-            output = <div className = "login" >
+        return ( <div className = "loginbar">
+            <div className = "login" >
                 <form onSubmit = {this.handleLogIn}>
                 <label className = "signinLabel llabel1" >Username</label>
                 <input className = "logininput linput1" type = "text" name = "username"  onChange = {this.changeHandler } value = {this.state.username}/>
@@ -167,15 +142,6 @@ class Login extends Component {
                 <button className = "loginbutton" type="submit">LOG IN</button>
                 </form>
             </div>
-        } else {
-            output = <div className = "login" >
-                <form onSubmit = {this.handleLogOut}>
-                <button className = "loginbutton" type="submit">LOG OUT</button>
-                </form>
-            </div>
-        }
-        return ( <div className = "navbar">
-            {output}
         </div> );
     }
 }

@@ -10,7 +10,7 @@ class Auth extends Component {
         this.state = {
             loggedIn: false,
             message: ""
-        }
+        };
     }
     
     logger = (key) => {

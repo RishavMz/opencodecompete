@@ -10,11 +10,11 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path = "/" exact component = {Main}>
-            {loginCookie === ""? <Redirect to = "/login"/> : null}
-          </Route>
-          <Route path = "/login" exact component = {Auth}>
+        <Route path = "/login" exact component = {Auth}>
           {loginCookie !== ""? <Redirect to = "/"/> : null}
+          </Route>
+          <Route path = "/" component = {Main}>
+            {loginCookie === ""? <Redirect to = "/login"/> : null}
           </Route>
         </Switch>
       </Router>

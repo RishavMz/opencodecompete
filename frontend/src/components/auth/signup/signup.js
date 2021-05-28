@@ -13,7 +13,7 @@ class Signup extends Component {
             email: "",
             password: "",
             passwordre: ""
-        }
+        };
     }
         
 
@@ -43,7 +43,7 @@ class Signup extends Component {
             password: this.state.password,
             email: this.state.email 
         }, {withCredentials: true })
-    .then(res => {
+    .then(() => {
         this.props.message("Sign Up Successful");
         this.setState({username:"", email:"", password:"",passwordre:""})
         })

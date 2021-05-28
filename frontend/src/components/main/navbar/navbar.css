@@ -1,0 +1,23 @@
+.navbar{
+    background-color: rgb(8, 241, 164);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    overflow-x: hidden;
+    padding-top: 25px ;
+    padding-bottom: 25px;
+}
+
+.navlink{
+    color: white;
+    font-weight: bold;
+    font-size: 14pt;
+    margin-left: 25px;
+    margin-right: 25px;
+    float: right;
+    text-decoration: none;
+}
+.main{
+    margin-top: 100px;
+}
