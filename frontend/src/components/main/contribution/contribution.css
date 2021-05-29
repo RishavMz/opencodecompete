@@ -1,0 +1,51 @@
+.contribute{
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    padding: 0% 2% 2% 2%;
+    border-radius: 25px;
+    border-bottom: 1px solid grey;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+}
+
+.upload{
+    background-color: green;
+    border-radius: 15px;
+    padding: 1% 1% 1% 1%;
+    color: white;
+    font-weight: bold;
+}
+
+.upload1{
+    background-color: white;
+    border-radius: 15px;
+    padding: 1% 1% 1% 1%;
+    color: black;
+    font-weight: bold;
+    margin-right: 100px;
+}
+
+.upload1::-webkit-file-upload-button{
+    background-color: red;
+}
+.shift{
+    margin-left: 30%;
+}
+
+@media screen and (max-width: 640px){
+    .shift{
+        margin-left: 10%;
+    }
+    .upload1{
+        padding: 0px;
+        width: auto;
+    }
+    .contribution{
+        margin-top: 300px;
+    }
+    .contribute{
+        margin-top: 100px;
+    }
+}

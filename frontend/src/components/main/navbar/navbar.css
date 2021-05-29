@@ -22,3 +22,13 @@
 .main{
     margin-top: 100px;
 }
+@media screen and (max-width: 640px){
+    .navbar{
+        display: flex;
+        flex-direction: column;
+    }
+    .navlink{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}

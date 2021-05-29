@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './feed.css';
 
 class Blogs extends Component {
     constructor(){
