@@ -15,7 +15,7 @@ class Main extends Component {
                 <Switch>
                     <Route path = "/" exact component = {Feed}/>
                     <Route path = "/profile" exact component = {Profile}/>
-                    <Route path = "/question/:slug" exact component = {Question}/>
+                    <Route path = "/question/" exact component = {Question}/>
                     <Route path="/" component={NotFound} />
                 </Switch>
             </Router>

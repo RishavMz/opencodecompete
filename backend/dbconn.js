@@ -10,31 +10,31 @@ const conn = new Pool({
 const initialize = async() => {
 
     await conn.query("CREATE TABLE IF NOT EXISTS USERS( ID SERIAL PRIMARY KEY , USERNAME VARCHAR(255) , EMAIL VARCHAR(255) UNIQUE NOT NULL , PASSWORD VARCHAR(255) );")
-        .then(res => console.log("Successfully initialized USERS table"))
+        .then(()=> console.log("Successfully initialized USERS table"))
         .catch(err => setImmediate(() => {   throw err }));
 
     await conn.query("CREATE TABLE IF NOT EXISTS DATA ( ID SERIAL PRIMARY KEY , USERID INTEGER, PROFILEPIC TEXT, FIRSTNAME VARCHAR(255), LASTNAME VARCHAR(255), QUOTE TEXT, SCORE INTEGER DEFAULT 0, BLOGS INTEGER DEFAULT 0, FOREIGN KEY (USERID) REFERENCES USERs(ID) );")
-        .then(res => console.log("Successfully initialized DATA table"))
+        .then(()=> console.log("Successfully initialized DATA table"))
         .catch(err => setImmediate(() => {   throw err }));    
 
-    await conn.query("CREATE TABLE IF NOT EXISTS QUESTIONS ( ID SERIAL PRIMARY KEY , USERID INTEGER, STATEMENT TEXT , INPUT TEXT , OUTPUT TEXT , LIKES INTEGER DEFAULT 0, DISLIKES INTEGER DEFAULT 0, FOREIGN KEY(USERID) REFERENCES USERS(ID) );")
-        .then(res => console.log("Successfully initialized QUESTIONS table"))
+    await conn.query("CREATE TABLE IF NOT EXISTS QUESTIONS ( ID SERIAL PRIMARY KEY , USERID INTEGER, STATEMENT TEXT , INPUT TEXT , OUTPUT TEXT , LIKES INTEGER DEFAULT 0, DISLIKES INTEGER DEFAULT 0, CORRECT INTEGER DEFAULT 0, WRONG INTEGER DEFAULT 0, FOREIGN KEY(USERID) REFERENCES USERS(ID) );")
+        .then(()=> console.log("Successfully initialized QUESTIONS table"))
         .catch(err => setImmediate(() => {   throw err })); 
     
     await conn.query("CREATE TABLE IF NOT EXISTS SOLVED ( ID SERIAL PRIMARY KEY , USERID INTEGER, QUESTIONID INTEGER , SCORE INTEGER , FOREIGN KEY(USERID) REFERENCES USERs(ID) , FOREIGN KEY(QUESTIONID) REFERENCES QUESTIONS(ID) );")
-        .then(res => console.log("Successfully initialized SOLVED table"))
+        .then(()=> console.log("Successfully initialized SOLVED table"))
         .catch(err => setImmediate(() => {   throw err }));
     
     await conn.query("CREATE TABLE IF NOT EXISTS BLOGS ( ID SERIAL PRIMARY KEY , USERID INTEGER, CONTENT TEXT , LIKES INTEGER DEFAULT 0 , DISLIKES INTEGER DEFAULT 0 , FOREIGN KEY (USERID) REFERENCES USERs(ID) );")
-        .then(res => console.log("Successfully initialized BLOGS table"))
+        .then(()=> console.log("Successfully initialized BLOGS table"))
         .catch(err => setImmediate(() => {   throw err }));   
     
     await conn.query("CREATE TABLE IF NOT EXISTS COMMENTS ( ID SERIAL PRIMARY KEY , USERID INTEGER, BLOGID INTEGER , CONTENT TEXT , LIKES INTEGER DEFAULT 0 , DISLIKES INTEGER DEFAULT 0 , FOREIGN KEY (USERID) REFERENCES USERs(ID) , FOREIGN KEY(BLOGID) REFERENCES BLOGS(ID) );")
-        .then(res => console.log("Successfully initialized COMMENTS table"))
+        .then(()=> console.log("Successfully initialized COMMENTS table"))
         .catch(err => setImmediate(() => {   throw err }));
 
     await conn.query("CREATE TABLE IF NOT EXISTS REPLY ( ID SERIAL PRIMARY KEY , USERID INTEGER, BLOGID INTEGER , COMMENTID INTEGER ,  CONTENT TEXT , LIKES INTEGER DEFAULT 0 , DISLIKES INTEGER DEFAULT 0 , FOREIGN KEY (USERID) REFERENCES USERs(ID) , FOREIGN KEY(BLOGID) REFERENCES BLOGS(ID) , FOREIGN KEY(COMMENTID) REFERENCES COMMENTS(ID) );")
-        .then(res => console.log("Successfully initialized REPLY table"))
+        .then(()=> console.log("Successfully initialized REPLY table"))
         .catch(err => setImmediate(() => {   throw err }));
 
 }

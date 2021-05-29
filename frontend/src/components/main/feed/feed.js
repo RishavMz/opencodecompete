@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import Blogs from './blogs';
+import Questions from './questions';
+import './feed.css'
+
 
 class Feed extends Component {
     constructor(){
@@ -9,7 +13,8 @@ class Feed extends Component {
     }
     render() { 
         return ( <div className = "feed">
-            This is feed
+            <Blogs/>
+            <Questions/>
         </div> );
     }
 }
