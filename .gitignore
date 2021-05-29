@@ -5,4 +5,6 @@ node_modules
 
 # Uploaded files 
 backend/data/blogs/*.*
-backend/data/questions/*.*
+backend/data/questions/statement/*.*
+backend/data/questions/input/*.*
+backend/data/questions/output/*.*

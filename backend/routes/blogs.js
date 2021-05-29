@@ -7,6 +7,7 @@ var uploadtime = "";
 var filename = "";
 //==================== Multer configuration ==================
 
+// Configuring storage location for uploading blog file
 var blogStorage = multer.diskStorage({
   destination: function(req, file, cb) {
       cb(null, __dirname+'../../data/blogs');
@@ -21,7 +22,7 @@ var blogStorage = multer.diskStorage({
 
 //===================== blog routes ===========================
 
-
+// Route to get all blog files (for testing purpose)
 router.get("/all", async(req, res) =>{
     await conn.query("SELECT * FROM BLOGS;")
     .then((response) => {
@@ -32,7 +33,7 @@ router.get("/all", async(req, res) =>{
 });
 
 
-
+// Route to upload blog file and add it to database 
 router.post("/new",blogUpload.single('blog'), async(req, res) => {
   await conn.query("INSERT INTO BLOGS(USERID , CONTENT) VALUES($1, $2)", [req.session.userID , filename])
   .then(()=>{

@@ -51,7 +51,7 @@ class Contribution extends Component {
         });
     }
 
-    handleNewQuestion = (key) => {
+    handleNewQuestion = async(key) => {
         key.preventDefault();
         console.log(this.state)
         if(this.state.questionfile === ''){
@@ -61,7 +61,71 @@ class Contribution extends Component {
         } else if (this.state.outputfile === ''){
             this.setState({message: "Correct output file has not been uploaded"})
         } else {
-            this.setState({message: "Pretend to successfully upload file"})
+            // Uploading problem statement for the question
+            const form1 = new formData();
+            form1.append('questionfile', this.state.questionfile);
+            
+            await axios.post(`http://127.0.0.1:5000/questions/newstatement`, form1,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            }, {withCredentials: true })
+            .then((res) => {
+                    this.setState({message: "New question: problem statement successfully uploaded"});
+                    console.log("statement");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+            
+            // Uploading input testcase for the given problem
+            const form2 = new formData();
+            form2.append('inputfile', this.state.inputfile);
+            
+            await axios.post(`http://127.0.0.1:5000/questions/newinput`, form2,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            }, {withCredentials: true })
+            .then((res) => {
+                    this.setState({message: "New Question: input file successfully uploaded"});
+                    console.log("input");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+            // Uploading output of testcase for the given problem
+            const form3 = new formData();
+            form3.append('outputfile', this.state.outputfile);
+            
+            await axios.post(`http://127.0.0.1:5000/questions/newoutput`, form3,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            }, {withCredentials: true })
+            .then((res) => {
+                    this.setState({message: "New Question: output file successfully uploaded"});
+                    console.log("output");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+            // Adding all three filenames to databaseto add question to website
+            await axios.post(`http://127.0.0.1:5000/questions/add`,{
+                headers: {
+                    'Content-Type': 'application/json'
+               } 
+            }, {withCredentials: true })
+            .then(() => {        
+                    this.setState({message: "Question successfully added to database"});
+                    console.log("everything")
+                })
+            .catch(error => {
+                console.error(error);
+            })
         }
     }
 
