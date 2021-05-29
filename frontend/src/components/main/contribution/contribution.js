@@ -13,10 +13,12 @@ class Contribution extends Component {
         this.changeQuestionHandler1 = this.changeQuestionHandler1.bind(this);
         this.changeQuestionHandler2 = this.changeQuestionHandler2.bind(this);
         this.changeQuestionHandler3 = this.changeQuestionHandler3.bind(this);
-
+        this.changeHandler          = this.changeHandler.bind(this);
         this.state = {
             blogfile         : '',
             blogfilename     : '',
+            title            : '',
+            questiontitle    : '',
             questionfile     : '',
             questionfilename : '',
             inputfilename    : '',
@@ -34,21 +36,34 @@ class Contribution extends Component {
     handleNewBlog = async(key) =>{
         key.preventDefault();
 
-        const form = new formData();
-        form.append('blog', this.state.blogfile);
-        
-        await axios.post(`http://127.0.0.1:5000/blogs/new`, form,
+        await axios.post(`http://127.0.0.1:5000/blogs/newtitle`,
         {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             },
+            title: this.state.title
         }, {withCredentials: true })
-        .then((res) => {
-                this.setState({message: "New blog successfully uploaded"});
+        .then(async(res) => {
+            const form = new formData();
+            form.append('blog', this.state.blogfile);
+            
+            await axios.post(`http://127.0.0.1:5000/blogs/new`, form,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            }, {withCredentials: true })
+            .then((res) => {
+                    this.setState({message: "New blog successfully uploaded"});
+            })
+            .catch((error) => {
+                console.error(error);
+            });
         })
         .catch((error) => {
             console.error(error);
         });
+        
     }
 
     handleNewQuestion = async(key) => {
@@ -155,6 +170,13 @@ class Contribution extends Component {
         });
     }
 
+    // Handle state change for input fields for react
+    changeHandler = (key) => {
+        this.setState({
+            [key.target.name] : key.target.value
+        });
+    }
+
     render() { 
 
         var message = "";
@@ -172,6 +194,7 @@ class Contribution extends Component {
             <center>
             <h2>Create a new Blog</h2><br/>
                 <form onSubmit={this.handleNewBlog} encType="multipart/form-data" id='form'>
+                    <b>Title :</b> <input className = "topicblog" type = "text" name = "title" onChange={this.changeHandler}/><br/><br/>
                     <div className='blogupload'>
                     <input className = "upload1" type="file" name="blogfile" required={true} onChange={this.changeBlogHandler} placeholder="Upload markdown file" />
                     <label >
@@ -188,6 +211,7 @@ class Contribution extends Component {
                 <form onSubmit={this.handleNewQuestion} encType="multipart/form-data" id='form'>
                     <div className='blogupload'>
                         <div className = "shift">
+                        <b>Title :</b> <input className = "topicblog" type = "text" name = "questiontitle" onChange={this.changeHandler}/><br/><br/>
                     Problem Statement : <input className = "upload1" type="file" name="questionfile" required={true} onChange={this.changeQuestionHandler1} placeholder="Upload file containing problem statement" />
                     <label >
                         {this.state.filename}

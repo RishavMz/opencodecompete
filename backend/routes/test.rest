@@ -38,16 +38,16 @@ Content-Type: application/json
 ###
 
 
-GET http://localhost:5000/
+GET http://localhost:5000/questions/all
 
 
 ###
 
-POST http://localhost:5000/blogs/new
+POST http://localhost:5000/blogs/newtitle
 Content-Type: application/json
 
 {
-    "filename": "test.txt"
+    "title": "test.txt"
 }
 
 

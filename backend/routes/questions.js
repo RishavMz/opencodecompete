@@ -97,5 +97,19 @@ router.post("/add", async(req, res) => {
 });
 
 
+// Handle correctly solved
+router.post("/correct", async(req, res) => {
+  await conn.query("UPDATE QUESTIONS SET CORRECT = CORRECT+1 WHERE ID = ",[req.body.id])
+  .then(() => {res.send("Question correct submission")})
+  .catch((err) => {console.log(err)});
+});
+
+// Handle incorrectly solved
+router.post("/wrong", async(req, res) => {
+  await conn.query("UPDATE QUESTIONS SET WRONG = WRONG+1 WHERE ID = ",[req.body.id])
+  .then(() => {res.send("Question incorrect")})
+  .catch((err) => {console.log(err)});
+});
+
 
 module.exports = router;

@@ -25,7 +25,7 @@ const initialize = async() => {
         .then(()=> console.log("Successfully initialized SOLVED table"))
         .catch(err => setImmediate(() => {   throw err }));
     
-    await conn.query("CREATE TABLE IF NOT EXISTS BLOGS ( ID SERIAL PRIMARY KEY , USERID INTEGER, CONTENT TEXT , LIKES INTEGER DEFAULT 0 , DISLIKES INTEGER DEFAULT 0 , FOREIGN KEY (USERID) REFERENCES USERs(ID) );")
+    await conn.query("CREATE TABLE IF NOT EXISTS BLOGS ( ID SERIAL PRIMARY KEY , USERID INTEGER, CONTENT TEXT, TITLE TEXT, LIKES INTEGER DEFAULT 0 , DISLIKES INTEGER DEFAULT 0 , FOREIGN KEY (USERID) REFERENCES USERs(ID) );")
         .then(()=> console.log("Successfully initialized BLOGS table"))
         .catch(err => setImmediate(() => {   throw err }));   
     

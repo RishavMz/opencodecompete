@@ -6,43 +6,38 @@ class Blogs extends Component {
     constructor(){
         super();
         this.state = {
-            blogs: [],
-            questions: []
+            blogs: []
         };
     }
 
     async componentDidMount() {
-        await axios.get(`http://127.0.0.1:5000/blogs/top`,{
+        await axios.get(`http://127.0.0.1:5000/blogs/all`,{
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
         })
         .then((res) => {
-            console.log(res.data);
             this.setState({blogs: res.data});
             })
         .catch((error) => {
             console.error(error);
         });
 
-
-        await axios.get(`http://127.0.0.1:5000/questions/top`,{
-            headers: {
-                'Content-Type': 'application/json'
-           },withCredentials: true  
-        })
-        .then((res) => {
-            console.log(res.data);
-            this.setState({questions: res.data});
-            })
-        .catch((error) => {
-            console.error(error);
-        })
     }
 
     render() { 
         return ( <div className = "blogpane">
-            Blog Blog Blog Blog Blog
+                <center><h2 className = "topic">BLOGS</h2></center>
+                <div className = "content">
+                {this.state.blogs.map((key) => {
+                    return(<div className = "feedseperate" key = {key.id} >
+                        <h3><b className = "topicfeed">{key.title}</b></h3>
+                        <span className = "feeddata">Likes:{key.likes}     </span> 
+                        <span className = "feeddata">Dislikes{key.dislikes}</span><br/>
+                        <h3>{}</h3>
+                    </div>)
+                })}
+            </div>
         </div> );
     }
 }

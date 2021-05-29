@@ -2,6 +2,7 @@
     position: absolute;
     left: 3%;
     width: 50%;
+    height: 55%;
     padding: 3% 3% 3% 3%;
     border-radius: 25px ;
     box-shadow: 0px 0px 15px grey;
@@ -10,11 +11,46 @@
 .questionpane{
     position: absolute;
     right: 4%;
+    height: 55%;
     padding: 3% 3% 3% 3%;
     border-radius: 25px ;
     box-shadow: 0px 0px 15px grey;
     width: 25%;
 }
+.feedseperate{
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+}
+.content{
+    overflow-y: scroll;
+    max-height: 90%;
+    margin-top: 50px;
+}
+
+.topic{
+    position: absolute;
+    margin-left: 25%;
+    margin-top: -1%;
+}
+.topicfeed{
+    margin-left: 5%;
+    border-radius: 20px;
+    padding: 10px 10px 10px 10px;
+    padding-top: 0px;
+    margin-top: 0px;
+    width: 200px;
+}
+.feeddata{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 @media screen and (max-width: 640px){
 
     .feed{

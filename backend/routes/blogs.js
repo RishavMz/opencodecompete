@@ -5,6 +5,8 @@ const multer = require("multer");
 
 var uploadtime = "";
 var filename = "";
+var title = "";
+
 //==================== Multer configuration ==================
 
 // Configuring storage location for uploading blog file
@@ -34,8 +36,13 @@ router.get("/all", async(req, res) =>{
 
 
 // Route to upload blog file and add it to database 
+router.post("/newtitle", (req, res) =>{
+  title = req.body.title;
+  res.send("Done")
+});
 router.post("/new",blogUpload.single('blog'), async(req, res) => {
-  await conn.query("INSERT INTO BLOGS(USERID , CONTENT) VALUES($1, $2)", [req.session.userID , filename])
+  console.log(req.body.title)
+  await conn.query("INSERT INTO BLOGS(USERID , CONTENT, TITLE) VALUES($1, $2, $3)", [req.session.userID , filename, title])
   .then(()=>{
     console.log("upload successful");
     res.send("Upload successful");
@@ -43,10 +50,22 @@ router.post("/new",blogUpload.single('blog'), async(req, res) => {
   .catch((err) =>{
     console.log(err);
   })
-
 });
 
 
+// Handle like
+router.post("/liked", async(req, res) => {
+  await conn.query("UPDATE BLOGS SET LIKES = LIKES+1 WHERE ID = ",[req.body.id])
+  .then(() => {res.send("Post Liked")})
+  .catch((err) => {console.log(err)});
+});
+
+// Handle dislike
+router.post("/disliked", async(req, res) => {
+  await conn.query("UPDATE BLOGS SET DISLIKES = DISLIKES+1 WHERE ID = ",[req.body.id])
+  .then(() => {res.send("Post Disliked")})
+  .catch((err) => {console.log(err)});
+});
 
 
 
