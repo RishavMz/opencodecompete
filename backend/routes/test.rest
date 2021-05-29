@@ -38,7 +38,18 @@ Content-Type: application/json
 ###
 
 
-GET http://localhost:5000/position/all
+GET http://localhost:5000/
 
 
 ###
+
+POST http://localhost:5000/blogs/new
+Content-Type: application/json
+
+{
+    "filename": "test.txt"
+}
+
+
+
+

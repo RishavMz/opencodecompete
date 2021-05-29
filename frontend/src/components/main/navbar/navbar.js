@@ -53,8 +53,8 @@ class Navbar extends Component {
             <Link className = "navlink" to = "/profile">
                 Profile
             </Link>
-            <Link className = "navlink" to = "/question">
-                Questions
+            <Link className = "navlink" to = "/contribution">
+                Contributions
             </Link>
             <Link className = "navlink" to = "/">
                 Home

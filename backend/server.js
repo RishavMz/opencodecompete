@@ -42,13 +42,16 @@ app.use(session({
 // ================= Routes ===================
 
 const authRoute = require("./routes/auth"); 
-
+const blogRoute = require("./routes/blogs");
 
 app.get("/", (req, res) =>{
     res.send("Random text go brr....");
+    console.log(req.session.username);
+
 });
 
 app.use("/auth", authRoute);
+app.use("/blogs",blogRoute);
 
 // ================= Server ===================
 
