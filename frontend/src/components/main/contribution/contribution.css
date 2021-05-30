@@ -28,7 +28,12 @@
 }
 
 .upload1::-webkit-file-upload-button{
-    background-color: red;
+    background-color: yellowgreen;
+    border-radius: 15px;
+    padding: 5px 10px 5px 10px;
+    border: none;
+    color: white;
+    font-weight: bold;
 }
 .shift{
     margin-left: 30%;

@@ -36,12 +36,12 @@ router.get("/all", async(req, res) =>{
 
 
 // Route to upload blog file and add it to database 
-router.post("/newtitle", (req, res) =>{
-  title = req.body.title;
-  res.send("Done")
-});
+
 router.post("/new",blogUpload.single('blog'), async(req, res) => {
-  console.log(req.body.title)
+  res.send("Uploaded"+filename);
+});
+router.post("/newtitle", async(req, res) =>{
+  title = req.body.title;
   await conn.query("INSERT INTO BLOGS(USERID , CONTENT, TITLE) VALUES($1, $2, $3)", [req.session.userID , filename, title])
   .then(()=>{
     console.log("upload successful");
@@ -54,14 +54,14 @@ router.post("/new",blogUpload.single('blog'), async(req, res) => {
 
 
 // Handle like
-router.post("/liked", async(req, res) => {
+router.put("/liked", async(req, res) => {
   await conn.query("UPDATE BLOGS SET LIKES = LIKES+1 WHERE ID = ",[req.body.id])
   .then(() => {res.send("Post Liked")})
   .catch((err) => {console.log(err)});
 });
 
 // Handle dislike
-router.post("/disliked", async(req, res) => {
+router.put("/disliked", async(req, res) => {
   await conn.query("UPDATE BLOGS SET DISLIKES = DISLIKES+1 WHERE ID = ",[req.body.id])
   .then(() => {res.send("Post Disliked")})
   .catch((err) => {console.log(err)});

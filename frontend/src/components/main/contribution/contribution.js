@@ -36,6 +36,21 @@ class Contribution extends Component {
     handleNewBlog = async(key) =>{
         key.preventDefault();
 
+        const form = new formData();
+        form.append('blog', this.state.blogfile);
+        
+        await axios.post(`http://127.0.0.1:5000/blogs/new`, form,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+        }, {withCredentials: true })
+        .then((res) => {
+                this.setState({message: "New blog successfully uploaded"});
+        })
+        .catch((error) => {
+            console.error(error);
+        });
         await axios.post(`http://127.0.0.1:5000/blogs/newtitle`,
         {
             headers: {
@@ -44,21 +59,7 @@ class Contribution extends Component {
             title: this.state.title
         }, {withCredentials: true })
         .then(async(res) => {
-            const form = new formData();
-            form.append('blog', this.state.blogfile);
-            
-            await axios.post(`http://127.0.0.1:5000/blogs/new`, form,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-            }, {withCredentials: true })
-            .then((res) => {
-                    this.setState({message: "New blog successfully uploaded"});
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+            this.setState({message: "New blog successfully added"});
         })
         .catch((error) => {
             console.error(error);
@@ -128,6 +129,20 @@ class Contribution extends Component {
             .catch((error) => {
                 console.error(error);
             });
+            // Adding question title
+            await axios.post(`http://127.0.0.1:5000/questions/titleadd`,{
+                headers: {
+                    'Content-Type': 'application/json'
+               },
+               title: this.state.questiontitle 
+            }, {withCredentials: true })
+            .then(() => {        
+                    this.setState({message: "Question successfully added to database"});
+                    console.log("Title")
+                })
+            .catch(error => {
+                console.error(error);
+            })
             // Adding all three filenames to databaseto add question to website
             await axios.post(`http://127.0.0.1:5000/questions/add`,{
                 headers: {
@@ -194,7 +209,7 @@ class Contribution extends Component {
             <center>
             <h2>Create a new Blog</h2><br/>
                 <form onSubmit={this.handleNewBlog} encType="multipart/form-data" id='form'>
-                    <b>Title :</b> <input className = "topicblog" type = "text" name = "title" onChange={this.changeHandler}/><br/><br/>
+                    <b>Title :</b> <input className = "topicfeed" type = "text" required={true} name = "title" onChange={this.changeHandler}/><br/><br/>
                     <div className='blogupload'>
                     <input className = "upload1" type="file" name="blogfile" required={true} onChange={this.changeBlogHandler} placeholder="Upload markdown file" />
                     <label >
@@ -211,7 +226,7 @@ class Contribution extends Component {
                 <form onSubmit={this.handleNewQuestion} encType="multipart/form-data" id='form'>
                     <div className='blogupload'>
                         <div className = "shift">
-                        <b>Title :</b> <input className = "topicblog" type = "text" name = "questiontitle" onChange={this.changeHandler}/><br/><br/>
+                        <b>Title :</b> <input className = "topicfeed" type = "text" required={true} name = "questiontitle" onChange={this.changeHandler}/><br/><br/>
                     Problem Statement : <input className = "upload1" type="file" name="questionfile" required={true} onChange={this.changeQuestionHandler1} placeholder="Upload file containing problem statement" />
                     <label >
                         {this.state.filename}

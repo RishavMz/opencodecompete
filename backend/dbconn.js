@@ -17,7 +17,7 @@ const initialize = async() => {
         .then(()=> console.log("Successfully initialized DATA table"))
         .catch(err => setImmediate(() => {   throw err }));    
 
-    await conn.query("CREATE TABLE IF NOT EXISTS QUESTIONS ( ID SERIAL PRIMARY KEY , USERID INTEGER, STATEMENT TEXT , INPUT TEXT , OUTPUT TEXT , LIKES INTEGER DEFAULT 0, DISLIKES INTEGER DEFAULT 0, CORRECT INTEGER DEFAULT 0, WRONG INTEGER DEFAULT 0, FOREIGN KEY(USERID) REFERENCES USERS(ID) );")
+    await conn.query("CREATE TABLE IF NOT EXISTS QUESTIONS ( ID SERIAL PRIMARY KEY , USERID INTEGER, TITLE TEXT , STATEMENT TEXT , INPUT TEXT , OUTPUT TEXT , LIKES INTEGER DEFAULT 0, DISLIKES INTEGER DEFAULT 0, CORRECT INTEGER DEFAULT 0, WRONG INTEGER DEFAULT 0, FOREIGN KEY(USERID) REFERENCES USERS(ID) );")
         .then(()=> console.log("Successfully initialized QUESTIONS table"))
         .catch(err => setImmediate(() => {   throw err })); 
     

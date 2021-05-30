@@ -47,7 +47,7 @@ const questionRoute = require("./routes/questions");
 
 app.get("/", (req, res) =>{
     res.send("Random text go brr....");
-    console.log(req.session.username);
+    console.log(req.session.userID);
 
 });
 

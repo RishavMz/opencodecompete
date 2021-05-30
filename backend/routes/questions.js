@@ -7,6 +7,7 @@ var uploadtime = "";
 var questionfilename = "";
 var inputfilename = "";
 var outputfilename = "";
+var questiontitle = "";
 //==================== Multer configuration ==================
 
 // Configuring storage location for uploading problem statement file
@@ -80,12 +81,17 @@ router.post("/newoutput",outputUpload.single('outputfile'), (req, res) => {
 
 });
 
+router.post("/titleadd", async(req, res) => {
+  questiontitle = req.body.title;
+  await res.send("Ok");
+})
+
 // Route to add all three filenames to database. Together, these four routes would add a question.
 router.post("/add", async(req, res) => {
     if(questionfilename === "" || inputfilename === "" || outputfilename === ""){
         await res.send("Statement, input and output files not uploaded yet")
     } else {
-        await conn.query("INSERT INTO QUESTIONS(USERID, STATEMENT, INPUT, OUTPUT) VALUES($1 , $2 , $3 , $4);", [req.session.userID, questionfilename , inputfilename , outputfilename])
+        await conn.query("INSERT INTO QUESTIONS(USERID, STATEMENT, INPUT, OUTPUT, TITLE) VALUES($1 , $2 , $3 , $4 , $5);", [req.session.userID, questionfilename , inputfilename , outputfilename, questiontitle])
         .then(() => {
             console.log("Added all 3 files for question");
             res.send("Successfully created question")
@@ -98,14 +104,14 @@ router.post("/add", async(req, res) => {
 
 
 // Handle correctly solved
-router.post("/correct", async(req, res) => {
+router.put("/correct", async(req, res) => {
   await conn.query("UPDATE QUESTIONS SET CORRECT = CORRECT+1 WHERE ID = ",[req.body.id])
   .then(() => {res.send("Question correct submission")})
   .catch((err) => {console.log(err)});
 });
 
 // Handle incorrectly solved
-router.post("/wrong", async(req, res) => {
+router.put("/wrong", async(req, res) => {
   await conn.query("UPDATE QUESTIONS SET WRONG = WRONG+1 WHERE ID = ",[req.body.id])
   .then(() => {res.send("Question incorrect")})
   .catch((err) => {console.log(err)});
