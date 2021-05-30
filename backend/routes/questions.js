@@ -96,9 +96,7 @@ router.post("/add", async(req, res) => {
             console.log("Added all 3 files for question");
             res.send("Successfully created question")
         })
-        .catch((err) => {
-            console.log(err);
-        })
+        .catch(err => setImmediate(() => {   throw err })); 
     }
 });
 
@@ -107,14 +105,14 @@ router.post("/add", async(req, res) => {
 router.put("/correct", async(req, res) => {
   await conn.query("UPDATE QUESTIONS SET CORRECT = CORRECT+1 WHERE ID = ",[req.body.id])
   .then(() => {res.send("Question correct submission")})
-  .catch((err) => {console.log(err)});
+  .catch(err => setImmediate(() => {   throw err })); 
 });
 
 // Handle incorrectly solved
 router.put("/wrong", async(req, res) => {
   await conn.query("UPDATE QUESTIONS SET WRONG = WRONG+1 WHERE ID = ",[req.body.id])
   .then(() => {res.send("Question incorrect")})
-  .catch((err) => {console.log(err)});
+  .catch(err => setImmediate(() => {   throw err })); 
 });
 
 

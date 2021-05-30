@@ -13,7 +13,7 @@ const initialize = async() => {
         .then(()=> console.log("Successfully initialized USERS table"))
         .catch(err => setImmediate(() => {   throw err }));
 
-    await conn.query("CREATE TABLE IF NOT EXISTS DATA ( ID SERIAL PRIMARY KEY , USERID INTEGER, PROFILEPIC TEXT, FIRSTNAME VARCHAR(255), LASTNAME VARCHAR(255), QUOTE TEXT, SCORE INTEGER DEFAULT 0, BLOGS INTEGER DEFAULT 0, FOREIGN KEY (USERID) REFERENCES USERs(ID) );")
+    await conn.query("CREATE TABLE IF NOT EXISTS DATA ( ID SERIAL PRIMARY KEY , USERID INTEGER, PROFILEPIC TEXT, EMAIL TEXT , USERNAME TEXT , FIRSTNAME VARCHAR(255), LASTNAME VARCHAR(255), QUOTE TEXT, SCORE INTEGER DEFAULT 0, BLOGS INTEGER DEFAULT 0, FOREIGN KEY (USERID) REFERENCES USERs(ID) );")
         .then(()=> console.log("Successfully initialized DATA table"))
         .catch(err => setImmediate(() => {   throw err }));    
 
@@ -36,6 +36,18 @@ const initialize = async() => {
     await conn.query("CREATE TABLE IF NOT EXISTS REPLY ( ID SERIAL PRIMARY KEY , USERID INTEGER, BLOGID INTEGER , COMMENTID INTEGER ,  CONTENT TEXT , LIKES INTEGER DEFAULT 0 , DISLIKES INTEGER DEFAULT 0 , FOREIGN KEY (USERID) REFERENCES USERs(ID) , FOREIGN KEY(BLOGID) REFERENCES BLOGS(ID) , FOREIGN KEY(COMMENTID) REFERENCES COMMENTS(ID) );")
         .then(()=> console.log("Successfully initialized REPLY table"))
         .catch(err => setImmediate(() => {   throw err }));
+
+    await conn.query("CREATE TABLE IF NOT EXISTS BLOGLIKES (ID SERIAL PRIMARY KEY , USERID INTEGER , BLOGID INTEGER , FOREIGN KEY(USERID) REFERENCES USERS(ID) , FOREIGN KEY(BLOGID) REFERENCES BLOGS(ID));")
+        .then(() => console.log("Successfully initialized BLOGLIKES table"))
+        .catch(err => setImmediate(() => {   throw err }));   
+
+    await conn.query("CREATE TABLE IF NOT EXISTS COMMENTLIKES (ID SERIAL PRIMARY KEY , USERID INTEGER , COMMENTID INTEGER , FOREIGN KEY(USERID) REFERENCES USERS(ID) , FOREIGN KEY(COMMENTID) REFERENCES COMMENTS(ID));")
+        .then(() => console.log("Successfully initialized COMMENTLIKES table"))
+        .catch(err => setImmediate(() => {   throw err }));   
+
+    await conn.query("CREATE TABLE IF NOT EXISTS REPLYLIKES (ID SERIAL PRIMARY KEY , USERID INTEGER , REPLYID INTEGER , FOREIGN KEY(USERID) REFERENCES USERS(ID) , FOREIGN KEY(REPLYID) REFERENCES REPLY(ID));")
+        .then(() => console.log("Successfully initialized REPLYLIKES table"))
+        .catch(err => setImmediate(() => {   throw err }));   
 
 }
 

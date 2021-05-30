@@ -47,9 +47,7 @@ router.post("/newtitle", async(req, res) =>{
     console.log("upload successful");
     res.send("Upload successful");
   })
-  .catch((err) =>{
-    console.log(err);
-  })
+  .catch(err => setImmediate(() => {   throw err })); 
 });
 
 
@@ -57,14 +55,14 @@ router.post("/newtitle", async(req, res) =>{
 router.put("/liked", async(req, res) => {
   await conn.query("UPDATE BLOGS SET LIKES = LIKES+1 WHERE ID = ",[req.body.id])
   .then(() => {res.send("Post Liked")})
-  .catch((err) => {console.log(err)});
+  .catch(err => setImmediate(() => {   throw err })); 
 });
 
 // Handle dislike
 router.put("/disliked", async(req, res) => {
   await conn.query("UPDATE BLOGS SET DISLIKES = DISLIKES+1 WHERE ID = ",[req.body.id])
   .then(() => {res.send("Post Disliked")})
-  .catch((err) => {console.log(err)});
+  .catch(err => setImmediate(() => {   throw err })); 
 });
 
 

@@ -16,8 +16,8 @@ POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-    "username": "test",
-    "password": "pass"
+    "username": "RishavMz",
+    "password": "password"
 }
 
 
@@ -38,7 +38,7 @@ Content-Type: application/json
 ###
 
 
-GET http://localhost:5000/questions/all
+GET http://localhost:5000/profiles/me
 
 
 ###

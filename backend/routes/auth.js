@@ -55,9 +55,16 @@ router.post("/signup", async (req, res) => {
 
             await conn.query("INSERT INTO USERS (USERNAME, EMAIL, PASSWORD) VALUES ( $1 , $2, $3)" , [ req.body.username, req.body.email, hashed ])
             .then(async() => {
-
-                res.status("201")
-                res.send('201Created Successfully');
+                await conn.query("SELECT ID FROM USERS WHERE EMAIL = $1", [req.body.email])
+                .then(async(response) => {
+                    await conn.query("INSERT INTO DATA(USERID, EMAIL, USERNAME, FIRSTNAME, LASTNAME) VALUES ($1, $2, $3, $4, $5);", [response.rows[0].id, req.body.email , req.body.username , "", "" ])
+                    .then(() =>  {
+                        res.status("201")
+                        res.send('201Created Successfully');
+                    })
+                    .catch(err => setImmediate(() => {   throw err })); 
+                })
+                .catch(err => setImmediate(() => {   throw err }));                
             })
             .catch(err => setImmediate(() => {   throw err })); 
         });

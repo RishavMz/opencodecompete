@@ -1,0 +1,18 @@
+.profiletopic{
+    margin-left: 25%;
+    width: 500px;
+    font-size: 14pt;
+    font-weight: 400;
+    display: inline-block;
+}
+.profiledata{
+    margin-left: 5%;
+    font-size: 14pt;
+    font-weight: 900;
+}
+.profileinput{
+    padding: 10px 10px 10px 10px;
+    font-size: 14pt;
+    border-radius: 10px;
+    outline: none;
+}
