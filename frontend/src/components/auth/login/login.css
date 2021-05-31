@@ -45,6 +45,9 @@
 
 .message{
     background-color: aquamarine;
+    position: fixed;
+    top: 10%;
+    left: 25%;
     border: 1px solid green;
     color: green;
     font-weight: bold;

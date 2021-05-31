@@ -11,14 +11,9 @@ router.get("/me", async(req, res) => {
 });
 
 router.put("/update", async(req,res) => {
-    if(req.body.firstname === "" || req.body.lastname === ""){
-        res.status("404");
-        res.send("No data provided")
-    } else {
-        await conn.query("UPDATE DATA SET FIRSTNAME = $1, LASTNAME = $2 WHERE USERID = $3;", [req.body.firstname, req.body.lastname, req.session.userID])
-        .then(() => res.send("Successfully updated"))
-        .catch(err => setImmediate( () => {   throw err}));
-    }
+    await conn.query("UPDATE DATA SET FIRSTNAME = $1, LASTNAME = $2, QUOTE = $3 WHERE USERID = $4;", [req.body.firstname, req.body.lastname, req.body.quote, req.session.userID])
+    .then(() => res.send("Successfully updated"))
+    .catch(err => setImmediate( () => {   throw err}));
 })
 
 module.exports = router;
