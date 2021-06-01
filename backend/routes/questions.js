@@ -60,6 +60,15 @@ router.get("/all", async(req, res) =>{
     .catch(err => setImmediate(() => {   throw err }));
 });
 
+// Send details of indivisual question as response
+router.get("/details/:slug" , async(req, res) => {
+  await conn.query("SELECT * FROM QUESTIONS WHERE ID = $1;", [req.params.slug])
+    .then((response) => {
+        res.send(response.rows[0]);
+    })
+    .catch(err => setImmediate(() => {   throw err }));
+})
+
 
 // Route to upload problem statement
 router.post("/newstatement",questionUpload.single('questionfile'), (req, res) => {

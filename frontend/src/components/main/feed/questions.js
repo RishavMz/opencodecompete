@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './feed.js';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 class Questions extends Component {
@@ -29,12 +30,13 @@ class Questions extends Component {
             <center><h2 className = "topic">QUESTIONS</h2></center>
                 <div className = "content">
                 {this.state.questions.map((key) => {
-                    return(<div className = "feedseperate" key = {key.id} >
+                    return(<Link to = {`/answer/${key.id}`} key = {key.id}><div className = "feedseperate"  >
+                        {key.id}
                         <h3><b className = "topicfeeed">{key.title}</b></h3>
                         <span className = "feeddata">Solved:{key.correct}     </span> 
                         <span className = "feeddata">Accuracy: {(parseInt(key.correct)/parseInt(key.wrong+key.correct)*100)}</span><br/>
                         <h3>{}</h3>
-                    </div>)
+                    </div></Link>)
                 })}
             </div>
         </div> );
