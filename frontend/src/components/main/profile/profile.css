@@ -16,3 +16,9 @@
     border-radius: 10px;
     outline: none;
 }
+
+@media screen and (max-width: 960px) {
+    .profileinput{
+        margin-left: 25%;
+    }
+}

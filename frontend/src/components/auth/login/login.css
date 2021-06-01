@@ -44,6 +44,7 @@
 }
 
 .message{
+    z-index: 1000;
     background-color: aquamarine;
     position: fixed;
     top: 10%;
@@ -51,13 +52,16 @@
     border: 1px solid green;
     color: green;
     font-weight: bold;
-    margin: 25px 25px 25px 25px;
     width: 50%;
+    margin-top: 25px;
     padding: 15px 15px 15px 15px;
     border-radius: 25px;
 }
 
 @media screen and (max-width: 640px) {
+    .message{
+        margin-top: 210px;
+    }
     .loginbar{
         height: 250px;
     }

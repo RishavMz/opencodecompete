@@ -5,6 +5,7 @@ import Profile from './profile/profile';
 import Contribution from './contribution/contribution';
 import NotFound from './notfound/notfound';
 import {BrowserRouter as Router , Switch , Route} from 'react-router-dom'
+import './main.css';
 
 class Main extends Component {
     state = {  }

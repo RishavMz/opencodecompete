@@ -2,7 +2,7 @@
     position: absolute;
     left: 3%;
     width: 50%;
-    height: 70%;
+    min-height: 70%;
     padding: 3% 3% 3% 3%;
     border-radius: 25px ;
     box-shadow: 0px 0px 15px grey;
@@ -11,7 +11,7 @@
 .questionpane{
     position: absolute;
     right: 4%;
-    height: 70%;
+    min-height: 70%;
     padding: 3% 3% 3% 3%;
     border-radius: 25px ;
     box-shadow: 0px 0px 15px grey;
@@ -28,8 +28,6 @@
 
 }
 .content{
-    overflow-y: scroll;
-    max-height: 95%;
     margin-top: 50px;
 }
 

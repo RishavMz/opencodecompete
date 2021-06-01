@@ -12,7 +12,7 @@ Current objectives :
 [x] add logout + configure login/logout
 [x] add feed section
 [x] add contribute section
-[ ] add profile section
+[x] add profile section
 [ ] view indivisual question
 [ ] upload and check solution
 [ ] update stats on answer submission
@@ -26,6 +26,8 @@ Future objectives:
 [ ] reply on blog comments
 [ ] like/dislike comments
 [ ] like/dislike replies
+[ ] add my blogs and questions solved(as links) to profile section
+[ ] add dp and stats to profile section
 [ ] view other peoples' profiles
 [ ] reorganise feed section
 [ ] footer (do we really need one?)
