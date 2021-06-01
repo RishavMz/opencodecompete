@@ -41,6 +41,7 @@ class Profile extends Component {
     }
 
     handleUpdate = async(key) => {
+        console.log(this.state)
         key.preventDefault();
         await axios.put(`http://127.0.0.1:5000/profiles/update`,
         {
@@ -81,13 +82,13 @@ class Profile extends Component {
                 {message}    
             </center>
             <form onSubmit = {this.handleUpdate}>
-                <div className = "profiletopic">USERNAME:</div><input className = "profileinput" type = "text" name = "username" value = {this.state.username} readOnly/><br/><br/>
+                <div className = "profiletopic">USERNAME:</div><input className = "profileinput" type = "text" name = "username"  onChange = {this.changeHandler} value = {this.state.username} readOnly/><br/><br/>
                 <div className = "profiletopic">FIRSTNAME:</div><input className = "profileinput" type = "text" name = "firstname" onChange = {this.changeHandler} value = {this.state.firstname}/><br/><br/>
                 <div className = "profiletopic">LASTNAME:</div><input className = "profileinput" type = "text" name = "lastname" onChange = {this.changeHandler} value = {this.state.lastname}/><br/><br/>
-                <div className = "profiletopic">EMAIL:</div><input className = "profileinput" type = "text" name = "email" value = {this.state.email} readOnly/><br/><br/>
+                <div className = "profiletopic">EMAIL:</div><input className = "profileinput" type = "text" name = "email" onChange = {this.changeHandler} value = {this.state.email} readOnly/><br/><br/>
                 <div className = "profiletopic">QUOTE:</div><input className = "profileinput" type = "text" name = "quote" onChange = {this.changeHandler} value = {this.state.quote}/><br/><br/>
-                <div className = "profiletopic">QUESTIONS SOLVED:</div><input className = "profileinput" type = "text" name = "score" value = {this.state.score} readOnly/><br/><br/>
-                <div className = "profiletopic">BLOGS WRITTEN:</div><input className = "profileinput" type = "text" name = "blogs" value = {this.state.blogs} readOnly/><br/><br/>
+                <div className = "profiletopic">QUESTIONS SOLVED:</div><input className = "profileinput" type = "text" name = "score" onChange = {this.changeHandler} value = {this.state.score} readOnly/><br/><br/>
+                <div className = "profiletopic">BLOGS WRITTEN:</div><input className = "profileinput" type = "text" name = "blogs" onChange = {this.changeHandler} value = {this.state.blogs} readOnly/><br/><br/>
                 <center><button type = "submit" className = "upload" name = "submit">UPDATE</button></center>
             </form>
         </div> );

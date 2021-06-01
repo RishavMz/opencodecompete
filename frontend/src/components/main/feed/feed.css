@@ -1,20 +1,20 @@
-.blogpane{
+.questionpane{
     position: absolute;
     left: 3%;
     width: 50%;
     min-height: 70%;
     padding: 3% 3% 3% 3%;
     border-radius: 25px ;
-    box-shadow: 0px 0px 15px grey;
+    box-shadow: 0px 0px 1px grey;
 }
 
-.questionpane{
+.blogpane{
     position: absolute;
     right: 4%;
     min-height: 70%;
     padding: 3% 3% 3% 3%;
     border-radius: 25px ;
-    box-shadow: 0px 0px 15px grey;
+    box-shadow: 0px 0px 1px grey;
     width: 25%;
 }
 .feedseperate{
@@ -22,10 +22,12 @@
     margin-right: 20px;
     padding: 10px 10px 10px 10px;
     border-radius: 10px;
-    border: 1px solid grey;
+    box-shadow: 0px 0px 5px grey;
     margin-top: 2%;
     margin-bottom: 2%;
-
+}
+.feedseperate:hover{
+    box-shadow: 0px 0px 15px grey;
 }
 .content{
     margin-top: 50px;
@@ -53,16 +55,16 @@
     .feed{
         margin-top: 300px;
     }
-    .blogpane{
+    .questionpane{
         width: 85%;
     }
-    .questionpane{
+    .blogpane{
        visibility: hidden;
     }
 }
 @media screen and (min-width: 640px) and (max-width: 1200px){
 
-    .blogpane{
+    .questionpane{
         position: relative;
         height: 300px;
         width: 80%;
@@ -72,7 +74,7 @@
         left: 3%;
 
     }
-    .questionpane{
+    .blogpane{
         position: relative;
         height: 300px;
         width: 80%;

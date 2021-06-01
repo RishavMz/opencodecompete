@@ -35,47 +35,50 @@ class Contribution extends Component {
 
     handleNewBlog = async(key) =>{
         key.preventDefault();
-
-        const form = new formData();
-        form.append('blog', this.state.blogfile);
-        
-        await axios.post(`http://127.0.0.1:5000/blogs/new`, form,
-        {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-        }, {withCredentials: true })
-        .then((res) => {
-                this.setState({message: "New blog successfully uploaded"});
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-        await axios.post(`http://127.0.0.1:5000/blogs/newtitle`,
-        {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            title: this.state.title
-        }, {withCredentials: true })
-        .then(async(res) => {
-            this.setState({message: "New blog successfully added"});
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+        if(this.state.blogfilename.substring(this.state.blogfilename.lastIndexOf(".")+1) !== "txt"){
+            this.setState({message: "Blog file must be in a .txt file"})
+        } else {
+            const form = new formData();
+            form.append('blog', this.state.blogfile);
+            
+            await axios.post(`http://127.0.0.1:5000/blogs/new`, form,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            }, {withCredentials: true })
+            .then((res) => {
+                    this.setState({message: "New blog successfully uploaded"});
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+            await axios.post(`http://127.0.0.1:5000/blogs/newtitle`,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                title: this.state.title
+            }, {withCredentials: true })
+            .then(async(res) => {
+                this.setState({message: "New blog successfully added"});
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        }
         
     }
 
     handleNewQuestion = async(key) => {
         key.preventDefault();
-        console.log(this.state)
-        if(this.state.questionfile === ''){
-            this.setState({message: "Problem statement has not been uploaded"})
-        } else if (this.state.inputfile === ''){
-            this.setState({message: "input test case file has not been uploaded"})
-        } else if (this.state.outputfile === ''){
-            this.setState({message: "Correct output file has not been uploaded"})
+        console.log(this.state, this.state.questionfilename.substring(this.state.questionfilename.lastIndexOf(".")+1))
+        if(this.state.questionfilename.substring(this.state.questionfilename.lastIndexOf(".")+1) !== "txt"){
+            this.setState({message: "Problem statement must be in a .txt file"})
+        } else if(this.state.inputfilename.substring(this.state.inputfilename.lastIndexOf(".")+1) !== "txt"){
+            this.setState({message: "Input test cases must be in a .txt file"})
+        } else if(this.state.outputfilename.substring(this.state.outputfilename.lastIndexOf(".")+1) !== "txt"){
+            this.setState({message: "Correct output must be in a .txt file"})
         } else {
             // Uploading problem statement for the question
             const form1 = new formData();
@@ -205,21 +208,6 @@ class Contribution extends Component {
             <center>
                 {message}    
             </center>
-            <div className = "contribute">
-            <center>
-            <h2>Create a new Blog</h2><br/>
-                <form onSubmit={this.handleNewBlog} encType="multipart/form-data" id='form'>
-                    <b>Title :</b> <input className = "topicfeed" type = "text" required={true} name = "title" onChange={this.changeHandler}/><br/><br/>
-                    <div className='blogupload'>
-                    <input className = "upload1" type="file" name="blogfile" required={true} onChange={this.changeBlogHandler} placeholder="Upload markdown file" />
-                    <label >
-                        {this.state.filename}
-                    </label>
-                        <input  className = "upload" type='submit' value='Upload' />
-                    </div>
-                </form>
-            </center>
-            </div>
 
             <div className = "contribute">
             <center><h2>Add a question</h2><br/></center>
@@ -244,6 +232,21 @@ class Contribution extends Component {
                     </center>
                     </div>
                 </form>
+            </div>
+            <div className = "contribute">
+            <center>
+            <h2>Create a new Blog</h2><br/>
+                <form onSubmit={this.handleNewBlog} encType="multipart/form-data" id='form'>
+                    <b>Title :</b> <input className = "topicfeed" type = "text" required={true} name = "title" onChange={this.changeHandler}/><br/><br/>
+                    <div className='blogupload'>
+                    <input className = "upload1" type="file" name="blogfile" required={true} onChange={this.changeBlogHandler} placeholder="Upload markdown file" />
+                    <label >
+                        {this.state.filename}
+                    </label>
+                        <input  className = "upload" type='submit' value='Upload' />
+                    </div>
+                </form>
+            </center>
             </div>
         </div> );
     }
