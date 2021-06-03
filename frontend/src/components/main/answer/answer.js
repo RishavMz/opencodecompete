@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './answer.css'
 
 class Answer extends Component {
     constructor(){
@@ -14,16 +15,28 @@ class Answer extends Component {
     async componentDidMount()
     {
         const questionID = window.location.href.substring(window.location.href.lastIndexOf("/")+1);
-        await axios.get("http://localhost:5000/questions/details/"+questionID , {
+        await axios.get("http://localhost:5000/questions/details/statement/"+questionID , {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
         })
         .then((res) => {
             this.setState({
-                statement: res.data.statement,
-                input: res.data.input,
-                output: res.data.output
+                statement: res.data
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+
+    await axios.get("http://localhost:5000/questions/details/input/"+questionID , {
+            headers: {
+                'Content-Type': 'application/json'
+           },withCredentials: true  
+        })
+        .then((res) => {
+            this.setState({
+                input: res.data,
             });
         })
         .catch((error) => {
@@ -33,9 +46,17 @@ class Answer extends Component {
 
     render() { 
         return ( <div className = "indivisualquestion">
-            Statement : {this.state.statement}<br/>
-            Input : {this.state.input}<br/>
+            <center>
+            <div className = "problemstatement">
+                <pre>
+                    {this.state.statement}
+                </pre>
+            </div></center>
+            <div class = "inputtestcase">
+                <pre>{this.state.input}</pre>
+            </div>
             Output : {this.state.output}<br/>
+            {console.log(this.state)}
         </div> );
     }
 }

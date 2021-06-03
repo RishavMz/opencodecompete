@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const conn = require("../dbconn");
 const multer = require("multer");
+const path = require("path");
 
 var uploadtime = "";
 var questionfilename = "";
@@ -49,7 +50,13 @@ var inputStorage = multer.diskStorage({
   });
   var outputUpload = multer({ storage: outputStorage });
 
+
+
+
 //===================== question routes ===========================
+
+
+
 
 // Show all questions (only for testing purpose)
 router.get("/all", async(req, res) =>{
@@ -59,15 +66,6 @@ router.get("/all", async(req, res) =>{
     })
     .catch(err => setImmediate(() => {   throw err }));
 });
-
-// Send details of indivisual question as response
-router.get("/details/:slug" , async(req, res) => {
-  await conn.query("SELECT * FROM QUESTIONS WHERE ID = $1;", [req.params.slug])
-    .then((response) => {
-        res.send(response.rows[0]);
-    })
-    .catch(err => setImmediate(() => {   throw err }));
-})
 
 
 // Route to upload problem statement
@@ -123,6 +121,53 @@ router.put("/wrong", async(req, res) => {
   .then(() => {res.send("Question incorrect")})
   .catch(err => setImmediate(() => {   throw err })); 
 });
+
+
+
+
+// ====================== Answer =================================
+
+
+
+// Send problem statemet of indivisual question as response
+router.get("/details/statement/:slug" , async(req, res) => {
+  await conn.query("SELECT * FROM QUESTIONS WHERE ID = $1;", [req.params.slug])
+    .then((response) => {
+      var options = {
+        root: path.join(__dirname+"/../data/questions/statement/")
+      }
+      var filename = response.rows[0].statement;
+        res.sendFile(filename, options, (err)=>{
+          if(err){
+            console.log(err);
+          } else {
+            console.log("Sent problem statement successfully");
+          }
+        })
+    })
+    .catch(err => setImmediate(() => {   throw err }));
+})
+// Send input testcases of indivisual question as response
+router.get("/details/input/:slug" , async(req, res) => {
+  await conn.query("SELECT * FROM QUESTIONS WHERE ID = $1;", [req.params.slug])
+    .then((response) => {
+      var options = {
+        root: path.join(__dirname+"/../data/questions/input")
+      }
+      var filename = response.rows[0].input;
+        res.sendFile(filename, options, (err)=>{
+          if(err){
+            console.log(err);
+          } else {
+            console.log("Sent input testcases successfully");
+          }
+        })
+    })
+    .catch(err => setImmediate(() => {   throw err }));
+})
+
+
+
 
 
 module.exports = router;

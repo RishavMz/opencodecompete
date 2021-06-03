@@ -31,7 +31,6 @@ class Questions extends Component {
                 <div className = "content">
                 {this.state.questions.map((key) => {
                     return(<Link to = {`/answer/${key.id}`} key = {key.id}><div className = "feedseperate"  >
-                        {key.id}
                         <h3><b className = "topicfeeed">{key.title}</b></h3>
                         <span className = "feeddata">Solved:{key.correct}     </span> 
                         <span className = "feeddata">Accuracy: {(parseInt(key.correct)/parseInt(key.wrong+key.correct)*100)}</span><br/>

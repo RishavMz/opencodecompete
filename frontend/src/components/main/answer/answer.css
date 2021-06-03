@@ -1,0 +1,16 @@
+.problemstatement{
+    height: 400px;
+    width: 75%;
+    overflow-y: scroll;
+    padding: 2% 2% 2% 2%;
+    box-shadow: 0px 0px 5px grey;
+}
+.inputtestcase{
+    margin-left: 10%;
+    margin-top: 5%;
+    height: 400px;
+    width: 75%;
+    overflow-y: scroll;
+    padding: 2% 2% 2% 2%;
+    box-shadow: 0px 0px 5px grey;
+}
