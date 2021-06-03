@@ -1,16 +1,22 @@
 .problemstatement{
-    height: 400px;
     width: 75%;
-    overflow-y: scroll;
     padding: 2% 2% 2% 2%;
     box-shadow: 0px 0px 5px grey;
+    margin-left: 10%;
 }
 .inputtestcase{
     margin-left: 10%;
+    margin-right: 10%;
     margin-top: 5%;
-    height: 400px;
-    width: 75%;
-    overflow-y: scroll;
-    padding: 2% 2% 2% 2%;
-    box-shadow: 0px 0px 5px grey;
+    padding: 5% 5% 5% 5%;
+    width: auto;
+    display: inline-block;
+}
+.download{
+    background-color: rgb(0, 45, 128);
+    color: white;
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 10px 10px 10px 10px;
+    border-radius: 25px;
 }

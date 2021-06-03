@@ -151,17 +151,8 @@ router.get("/details/statement/:slug" , async(req, res) => {
 router.get("/details/input/:slug" , async(req, res) => {
   await conn.query("SELECT * FROM QUESTIONS WHERE ID = $1;", [req.params.slug])
     .then((response) => {
-      var options = {
-        root: path.join(__dirname+"/../data/questions/input")
-      }
-      var filename = response.rows[0].input;
-        res.sendFile(filename, options, (err)=>{
-          if(err){
-            console.log(err);
-          } else {
-            console.log("Sent input testcases successfully");
-          }
-        })
+      var file = path.join(__dirname+"/../data/questions/input/"+response.rows[0].input);
+        res.download(file);
     })
     .catch(err => setImmediate(() => {   throw err }));
 })
