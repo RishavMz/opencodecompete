@@ -60,7 +60,7 @@ var inputStorage = multer.diskStorage({
 
 // Show all questions (only for testing purpose)
 router.get("/all", async(req, res) =>{
-    await conn.query("SELECT * FROM QUESTIONS;")
+    await conn.query("SELECT * FROM QUESTIONS where STATUS = 1;")
     .then((response) => {
         res.send(response.rows);
     })
@@ -157,6 +157,24 @@ router.get("/details/input/:slug" , async(req, res) => {
     .catch(err => setImmediate(() => {   throw err }));
 })
 
+// Send output of indivisual question as response
+router.get("/details/output/:slug" , async(req, res) => {
+  await conn.query("SELECT * FROM QUESTIONS WHERE ID = $1;", [req.params.slug])
+    .then((response) => {
+      var options = {
+        root: path.join(__dirname+"/../data/questions/output/")
+      }
+      var filename = response.rows[0].output;
+        res.sendFile(filename, options, (err)=>{
+          if(err){
+            console.log(err);
+          } else {
+            console.log("Sent output successfully");
+          }
+        })
+    })
+    .catch(err => setImmediate(() => {   throw err }));
+})
 
 
 

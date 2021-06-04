@@ -7,9 +7,14 @@ class Answer extends Component {
     constructor(){
         super();
         this.handleInputTestcase = this.handleInputTestcase.bind(this);
+        this.handleCheck = this.handleCheck.bind(this);
+        this.outputHandler = this.outputHandler.bind(this);
         this.state = {
             statement: "",
-            output: ""
+            output: "",
+            outputfile: "",
+            outputfilename: "",
+            result: ""
         }
     }
 
@@ -24,6 +29,20 @@ class Answer extends Component {
         .then((res) => {
             this.setState({
                 statement: res.data
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+
+        await axios.get("http://localhost:5000/questions/details/output/"+questionID , {
+            headers: {
+                'Content-Type': 'application/json'
+           },withCredentials: true  
+        })
+        .then((res) => {
+            this.setState({
+                output: res.data
             });
         })
         .catch((error) => {
@@ -51,8 +70,40 @@ class Answer extends Component {
 
     }
 
+    outputHandler = (e) => {
+        this.setState({
+            outputfile: e.target.files[0],
+            outputfilename: e.target.files[0].name
+        });
+    }
+
+    handleCheck = async(key) => {
+        key.preventDefault();
+        var data = ""
+        var read = new FileReader();
+        await read.readAsBinaryString(this.state.outputfile)
+        read.onloadend = ()=>{
+            data = read.result;
+            if(data === this.state.output){
+                this.setState({result:"correct"});
+            } else {
+                this.setState({result:"wrong"});
+            }
+        }
+    }
+
     render() { 
+        var message = "";
+        if(this.state.result !== ""){
+            message = <div className = "message">{this.state.result}  </div>  
+        } else {
+            message = ""
+        }
         return ( <div className = "indivisualquestion">
+            <center>
+                {message}    
+            </center>
+
             <div className = "problemstatement">
                 <pre>
                     {this.state.statement}
@@ -68,8 +119,12 @@ class Answer extends Component {
             </div>
             <div class = "inputtestcase">
                  <h2>Upload output File</h2>
-                <form>
-                    <input type = "file"/>
+                 <form onSubmit={this.handleCheck} >
+                    <input className = "upload1" type="file" name="outputfile" required={true} onChange={this.outputHandler} placeholder="Upload output file" />
+                    <label >
+                        {this.state.outputfilename}
+                    </label>
+                        <input  className = "download" type='submit' value='Upload' />
                 </form>
             </div>
             </center>    
