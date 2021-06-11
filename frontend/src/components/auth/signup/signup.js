@@ -34,7 +34,7 @@ class Signup extends Component {
     }
 
     // Signing up
-    axios.post(`http://127.0.0.1:5000/auth/signup`,
+    axios.post(`http://localhost:5000/auth/signup`,
         {
             headers: {
                  'Content-Type': 'application/json'

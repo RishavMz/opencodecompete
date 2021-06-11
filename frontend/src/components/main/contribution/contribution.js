@@ -41,7 +41,7 @@ class Contribution extends Component {
             const form = new formData();
             form.append('blog', this.state.blogfile);
             
-            await axios.post(`http://127.0.0.1:5000/blogs/new`, form,
+            await axios.post(`http://localhost:5000/blogs/new`, form,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -53,7 +53,7 @@ class Contribution extends Component {
             .catch((error) => {
                 console.error(error);
             });
-            await axios.post(`http://127.0.0.1:5000/blogs/newtitle`,
+            await axios.post(`http://localhost:5000/blogs/newtitle`,
             {
                 headers: {
                     'Content-Type': 'application/json'
@@ -84,7 +84,7 @@ class Contribution extends Component {
             const form1 = new formData();
             form1.append('questionfile', this.state.questionfile);
             
-            await axios.post(`http://127.0.0.1:5000/questions/newstatement`, form1,
+            await axios.post(`http://localhost:5000/questions/newstatement`, form1,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -102,7 +102,7 @@ class Contribution extends Component {
             const form2 = new formData();
             form2.append('inputfile', this.state.inputfile);
             
-            await axios.post(`http://127.0.0.1:5000/questions/newinput`, form2,
+            await axios.post(`http://localhost:5000/questions/newinput`, form2,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -119,7 +119,7 @@ class Contribution extends Component {
             const form3 = new formData();
             form3.append('outputfile', this.state.outputfile);
             
-            await axios.post(`http://127.0.0.1:5000/questions/newoutput`, form3,
+            await axios.post(`http://localhost:5000/questions/newoutput`, form3,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -133,7 +133,7 @@ class Contribution extends Component {
                 console.error(error);
             });
             // Adding question title
-            await axios.post(`http://127.0.0.1:5000/questions/titleadd`,{
+            await axios.post(`http://localhost:5000/questions/titleadd`,{
                 headers: {
                     'Content-Type': 'application/json'
                },
@@ -147,7 +147,7 @@ class Contribution extends Component {
                 console.error(error);
             })
             // Adding all three filenames to databaseto add question to website
-            await axios.post(`http://127.0.0.1:5000/questions/add`,{
+            await axios.post(`http://localhost:5000/questions/add`,{
                 headers: {
                     'Content-Type': 'application/json'
                } 

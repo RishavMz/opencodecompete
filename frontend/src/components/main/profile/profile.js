@@ -19,7 +19,7 @@ class Profile extends Component {
     }
 
     async componentDidMount(){
-        await axios.get(`http://127.0.0.1:5000/profiles/me`,{
+        await axios.get(`http://localhost:5000/profiles/me`,{
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -43,7 +43,7 @@ class Profile extends Component {
     handleUpdate = async(key) => {
         console.log(this.state)
         key.preventDefault();
-        await axios.put(`http://127.0.0.1:5000/profiles/update`,
+        await axios.put(`http://localhost:5000/profiles/update`,
         {
             headers: {
                  'Content-Type': 'application/json'

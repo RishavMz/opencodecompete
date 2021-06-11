@@ -29,7 +29,7 @@ class Login extends Component {
     async componentDidMount(){
 
         // Check if session available
-        await axios.get(`http://127.0.0.1:5000/auth/remember`,{
+        await axios.get(`http://localhost:5000/auth/remember`,{
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -55,7 +55,7 @@ class Login extends Component {
             // If session unavailable, check if valid cookie available
             const loginCookie = document.cookie.substring(document.cookie.indexOf("login=200")+9);
             if(loginCookie){
-                await axios.post(`http://127.0.0.1:5000/auth/remember`,
+                await axios.post(`http://localhost:5000/auth/remember`,
                 {
                     headers: {
                         'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ class Login extends Component {
             return;
         }
         // Try to log in
-        await axios.post(`http://127.0.0.1:5000/auth/login`,
+        await axios.post(`http://localhost:5000/auth/login`,
         {
             headers: {
                  'Content-Type': 'application/json'

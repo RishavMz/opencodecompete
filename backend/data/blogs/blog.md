@@ -1,0 +1,1 @@
+Blog files would be stored here

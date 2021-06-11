@@ -27,7 +27,7 @@ class Navbar extends Component {
         key.preventDefault();
 
         // Try to Log out 
-        await axios.post(`http://127.0.0.1:5000/auth/logout`,{
+        await axios.post(`http://localhost:5000/auth/logout`,{
             headers: {
                 'Content-Type': 'application/json'
            } 

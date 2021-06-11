@@ -12,7 +12,7 @@ class Questions extends Component {
     }
     async componentDidMount(){
 
-    await axios.get(`http://127.0.0.1:5000/questions/all`,{
+    await axios.get(`http://localhost:5000/questions/all`,{
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  

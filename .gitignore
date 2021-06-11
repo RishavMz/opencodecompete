@@ -5,8 +5,8 @@ assets/drop.sql
 
 
 # Uploaded files 
-backend/data/blogs/*.*
-backend/data/questions/statement/*.*
-backend/data/questions/input/*.*
-backend/data/questions/output/*.*
+backend/data/blogs/*.txt
+backend/data/questions/statement/*.txt
+backend/data/questions/input/*.txt
+backend/data/questions/output/*.txt
 
