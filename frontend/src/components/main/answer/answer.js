@@ -78,16 +78,41 @@ class Answer extends Component {
     }
 
     handleCheck = async(key) => {
+        const questionID = window.location.href.substring(window.location.href.lastIndexOf("/")+1);
         key.preventDefault();
         var data = ""
         var read = new FileReader();
         await read.readAsBinaryString(this.state.outputfile)
-        read.onloadend = ()=>{
+        read.onloadend = async()=>{
             data = read.result;
             if(data === this.state.output){
                 this.setState({result:"correct"});
+                await axios.put(`http://localhost:5000/questions/correct`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    id: questionID
+                }, {withCredentials: true })
+                .then((res) => {
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
             } else {
                 this.setState({result:"wrong"});
+                await axios.put(`http://localhost:5000/questions/wrong`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    id: questionID
+                }, {withCredentials: true })
+                .then((res) => {
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
             }
         }
     }

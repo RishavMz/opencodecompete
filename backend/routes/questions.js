@@ -110,15 +110,23 @@ router.post("/add", async(req, res) => {
 
 // Handle correctly solved
 router.put("/correct", async(req, res) => {
-  await conn.query("UPDATE QUESTIONS SET CORRECT = CORRECT+1 WHERE ID = ",[req.body.id])
-  .then(() => {res.send("Question correct submission")})
+  console.log("Correct"+req.body.id)
+
+  await conn.query("UPDATE QUESTIONS SET CORRECT = CORRECT+1 WHERE ID = $1",[req.body.id])
+  .then(() => {
+    res.send("Question correct submission")
+    console.log("Correct"+req.body.id)
+  })
   .catch(err => setImmediate(() => {   throw err })); 
 });
 
 // Handle incorrectly solved
 router.put("/wrong", async(req, res) => {
-  await conn.query("UPDATE QUESTIONS SET WRONG = WRONG+1 WHERE ID = ",[req.body.id])
-  .then(() => {res.send("Question incorrect")})
+  await conn.query("UPDATE QUESTIONS SET WRONG = WRONG+1 WHERE ID = $1",[req.body.id])
+  .then(() => {
+    res.send("Question incorrectcorrect submission")
+    console.log("InCorrect")
+  })
   .catch(err => setImmediate(() => {   throw err })); 
 });
 
