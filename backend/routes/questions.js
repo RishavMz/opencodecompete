@@ -3,6 +3,7 @@ const router = express.Router();
 const conn = require("../dbconn");
 const multer = require("multer");
 const path = require("path");
+const { Console } = require('console');
 
 var uploadtime = "";
 var questionfilename = "";
@@ -111,13 +112,26 @@ router.post("/add", async(req, res) => {
 // Handle correctly solved
 router.put("/correct", async(req, res) => {
   console.log("Correct"+req.body.id)
-
+  console.log(req.session.userID , req.body.id)
   await conn.query("UPDATE QUESTIONS SET CORRECT = CORRECT+1 WHERE ID = $1",[req.body.id])
   .then(() => {
     res.send("Question correct submission")
+  })
+  .catch(err => setImmediate(() => {   throw err })); 
+  await conn.query("SELECT COUNT(*) FROM SOLVED WHERE USERID = $1 AND QUESTIONID = $2",[req.session.userID,req.body.id])
+  .then(async(response) => {
+    if(response.rows[0].count === '0'){
+      await conn.query("INSERT INTO SOLVED (USERID, QUESTIONID,SCORE) VALUES ($1, $2, 1)",[req.session.userID,req.body.id])
+      .then(() => console.log("Updated solved table"))
+      .catch(err => setImmediate(() => {   throw err })); 
+      await conn.query("UPDATE DATA SET SCORE = SCORE+1 WHERE USERID = $1",[req.session.userID])
+      .then(() => console.log("Updated score"))
+      .catch(err => setImmediate(() => {   throw err })); 
+    }
     console.log("Correct"+req.body.id)
   })
   .catch(err => setImmediate(() => {   throw err })); 
+
 });
 
 // Handle incorrectly solved
