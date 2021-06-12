@@ -41,17 +41,23 @@
         * (POST) /new - Handles upload of a new blog file
         * (POST) /newtitle - Handles addition of title for blog and completion of blog addition
             > /new is followed by /newtitle to add a blog successfully
+        * (GET) /viewone/:slug - Returns the file containing the blog data
         * (PUT) /liked - Increments likes on a post by 1
         * (PUT) /disliked - Increment dislikes on a post by 1
+
     - /profiles - handled by profile.js
         * (GET) /me - Get response as data from DATA table for the logged in user
         * (PUT) /update - Handle updation of the mutable details for the user
+
     - /questions - handled by questions.js 
         * (GET)  /all - Returns all questions
         * (POST) /newstatement - Handles upload of new problem statement file
         * (POST) /newinput Handles upload of new input testcases file
         * (POST) /newoutput - Handles upload of new correct output file
         * (POST) /titleadd - Handles addition of title 
+        * (GET) /details/statement/:slug - Returns the file containing the problem statement
+        * (GET) /details/input/:slug - Returns the file containing the input tesecases
+        * (GET) /details/output/:slug - Returns the file containing the correct output
         * (POST) /add - Handles completion of uploading of question into database
             > /add is finally called after /newstatement, /newinput, /newoutput and /titleadd to upload a question
         * (PUT)  /correct - Increments correct submissions for a question on correct submission
@@ -79,5 +85,7 @@
     - navbar - Navbar😅
     - profile - Handles user profile viewing and updation
     - notfound - Handles 404 for unknown routes
+    - blogview - Handles viewing on an indivisual blog
+    - asnwer - Handles viewing of an indivisualquestion submittion
 
 
