@@ -3,7 +3,6 @@ const router = express.Router();
 const conn = require("../dbconn");
 const multer = require("multer");
 const path = require("path");
-const { Console } = require('console');
 
 var uploadtime = "";
 var questionfilename = "";
@@ -61,7 +60,7 @@ var inputStorage = multer.diskStorage({
 
 // Show all questions (only for testing purpose)
 router.get("/all", async(req, res) =>{
-    await conn.query("SELECT * FROM QUESTIONS where STATUS = 1;")
+    await conn.query("SELECT * FROM QUESTIONS where STATUS = 1 ORDER BY CORRECT DESC;")
     .then((response) => {
         res.send(response.rows);
     })

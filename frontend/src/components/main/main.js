@@ -5,6 +5,7 @@ import Profile from './profile/profile';
 import Contribution from './contribution/contribution';
 import NotFound from './notfound/notfound';
 import Answer from './answer/answer';
+import Blogview from './blogview/blogview';
 import {BrowserRouter as Router , Switch , Route} from 'react-router-dom'
 import './main.css';
 
@@ -19,6 +20,7 @@ class Main extends Component {
                     <Route path = "/profile" exact component = {Profile}/>
                     <Route path = "/contribution" exact component = {Contribution}/>
                     <Route path = "/answer/:slug" exact component = {Answer}/>
+                    <Route path = "/blogview/:slug" exact component = {Blogview}/>
                     <Route path="/" component={NotFound} />
                 </Switch>
             </Router>

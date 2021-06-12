@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const conn = require("../dbconn");
 const multer = require("multer");
+const path = require("path");
+
 
 var uploadtime = "";
 var filename = "";
@@ -51,6 +53,24 @@ router.post("/newtitle", async(req, res) =>{
   .catch(err => setImmediate(() => {   throw err })); 
 });
 
+// View a blog on screen
+router.get("/viewone/:slug" , async(req, res) => {
+  await conn.query("SELECT * FROM BLOGS WHERE ID = $1;", [req.params.slug])
+    .then((response) => {
+      var options = {
+        root: path.join(__dirname+"/../data/blogs/")
+      }
+      var filename = response.rows[0].content;
+        res.sendFile(filename, options, (err)=>{
+          if(err){
+            console.log(err);
+          } else {
+            console.log("Sent problem statement successfully");
+          }
+        })
+    })
+    .catch(err => setImmediate(() => {   throw err }));
+})
 
 // Handle like
 router.put("/liked", async(req, res) => {
