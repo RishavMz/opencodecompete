@@ -29,7 +29,7 @@ var blogStorage = multer.diskStorage({
 // Route to get all blog files (for testing purpose)
 router.get("/all", async(req, res) =>{
   console.log(req.session.userID);
-    await conn.query("SELECT * FROM BLOGS;")
+    await conn.query("SELECT * FROM BLOGS ORDER BY LIKES DESC;")
     .then((response) => {
         res.send(response.rows);
     })
@@ -74,14 +74,14 @@ router.get("/viewone/:slug" , async(req, res) => {
 
 // Handle like
 router.put("/liked", async(req, res) => {
-  await conn.query("UPDATE BLOGS SET LIKES = LIKES+1 WHERE ID = ",[req.body.id])
+  await conn.query("UPDATE BLOGS SET LIKES = LIKES+1 WHERE ID = $1",[req.body.id])
   .then(() => {res.send("Post Liked")})
   .catch(err => setImmediate(() => {   throw err })); 
 });
 
 // Handle dislike
 router.put("/disliked", async(req, res) => {
-  await conn.query("UPDATE BLOGS SET DISLIKES = DISLIKES+1 WHERE ID = ",[req.body.id])
+  await conn.query("UPDATE BLOGS SET DISLIKES = DISLIKES+1 WHERE ID = $1",[req.body.id])
   .then(() => {res.send("Post Disliked")})
   .catch(err => setImmediate(() => {   throw err })); 
 });
