@@ -159,6 +159,10 @@ router.post("/logout", async(req, res) => {
 
 //====================================================================
 
+router.post("/checklogout", async(req, res) => {
+    res.send({data:req.session.userID});
+});
+
 
 
 module.exports = router;

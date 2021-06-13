@@ -8,9 +8,55 @@ import Answer from './answer/answer';
 import Blogview from './blogview/blogview';
 import {BrowserRouter as Router , Switch , Route} from 'react-router-dom'
 import './main.css';
+import axios from 'axios'
+
 
 class Main extends Component {
-    state = {  }
+    constructor(){
+        super();
+        this.state = {}
+        this.setCookie = this.setCookie.bind(this);
+    }
+
+    setCookie(name, value, days) {
+        var expires = "";
+          var date = new Date();
+          date.setTime(date.getTime() + (31536000000));
+          expires = "; expires=" + date.toUTCString();
+        document.cookie = name + "=" + (value || "") + expires + "; path=/;SameSite=Lax";
+      }
+    async componentDidMount(){
+        // That mysterious bug
+        await axios.post(`http://localhost:5000/auth/checklogout`,{
+            headers: {
+                'Content-Type': 'application/json'
+           } 
+        }, {withCredentials: true })
+        .then(async(resp) => {
+            if(resp.data.data === undefined ){
+                alert("Session Lost Mysteriously")
+                await axios.post(`http://localhost:5000/auth/logout`,{
+                    headers: {
+                        'Content-Type': 'application/json'
+                   } 
+                }, {withCredentials: true })
+                .then(() => {
+                        this.setState({loggedIn : false });
+
+                        // Remove the login cookie value
+                        this.setCookie("login", "", 0 );
+                        console.log(document.cookie);
+                        window.location = "http://localhost:3000/login"
+                    })
+                .catch(error => {
+                    console.error(error);
+                })
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    }
     render() { 
         return ( <div className = "main">
             <Router>
