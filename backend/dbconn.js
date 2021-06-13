@@ -40,7 +40,9 @@ const initialize = async() => {
     await conn.query("CREATE TABLE IF NOT EXISTS BLOGLIKES (ID SERIAL PRIMARY KEY , USERID INTEGER , BLOGID INTEGER , FOREIGN KEY(USERID) REFERENCES USERS(ID) , FOREIGN KEY(BLOGID) REFERENCES BLOGS(ID));")
         .then(() => console.log("Successfully initialized BLOGLIKES table"))
         .catch(err => setImmediate(() => {   throw err }));   
-
+    await conn.query("CREATE TABLE IF NOT EXISTS BLOGDISLIKES (ID SERIAL PRIMARY KEY , USERID INTEGER , BLOGID INTEGER , FOREIGN KEY(USERID) REFERENCES USERS(ID) , FOREIGN KEY(BLOGID) REFERENCES BLOGS(ID));")
+        .then(() => console.log("Successfully initialized BLOGDISLIKES table"))
+        .catch(err => setImmediate(() => {   throw err })); 
     await conn.query("CREATE TABLE IF NOT EXISTS COMMENTLIKES (ID SERIAL PRIMARY KEY , USERID INTEGER , COMMENTID INTEGER , FOREIGN KEY(USERID) REFERENCES USERS(ID) , FOREIGN KEY(COMMENTID) REFERENCES COMMENTS(ID));")
         .then(() => console.log("Successfully initialized COMMENTLIKES table"))
         .catch(err => setImmediate(() => {   throw err }));   

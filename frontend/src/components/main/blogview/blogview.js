@@ -8,7 +8,10 @@ class Blogview extends Component {
         this.handleLike = this.handleLike.bind(this);
         this.handleDislike = this.handleDislike.bind(this);
         this.state = {
-            blog: ""
+            blog: "",
+            title: "",
+            likes: 0,
+            dislikes: 0
         }
     }
 
@@ -28,6 +31,23 @@ class Blogview extends Component {
         .catch((error) => {
             console.error(error);
         });
+
+        await axios.get("http://localhost:5000/blogs/details/"+blogID, {
+            headers: {
+                'Content-Type': 'application/json'
+           },withCredentials: true  
+        })
+        .then((res) => {
+            console.log("tst"+res.data)
+            this.setState({
+                title: res.data.title,
+                likes: res.data.likes,
+                dislikes: res.data.dislikes
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 
     handleLike = async(e) => {
@@ -41,6 +61,7 @@ class Blogview extends Component {
             }, {withCredentials: true })
         .then(() => {        
                 console.log("Liked")
+                this.setState({likes: this.state.likes+1})
             })
         .catch(error => {
             console.error(error);
@@ -58,6 +79,7 @@ class Blogview extends Component {
             }, {withCredentials: true })
         .then(() => {        
                 console.log("Disliked")
+                this.setState({dislikes: this.state.dislikes+1})
             })
         .catch(error => {
             console.error(error);
@@ -66,13 +88,13 @@ class Blogview extends Component {
 
 
     render(){
-
         return(<div className = "blogview">
+            <h2>{this.state.title}</h2>
             <pre>
                 {this.state.blog}
             </pre>
-                <button className = "bloglike" onClick = {this.handleLike}>Like</button>
-                <button className = "blogdislike" onClick = {this.handleDislike}>Dislike</button>
+                <button className = "bloglike" onClick = {this.handleLike}>Like</button>         <span className = "blogstats">{this.state.likes}</span>
+                <button className = "blogdislike" onClick = {this.handleDislike}>Dislike</button><span className = "blogstats">{this.state.dislikes}</span>
         </div>);
     }
 }

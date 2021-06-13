@@ -12,7 +12,7 @@
     font-weight: bold;
     margin-top: 100px;
     margin-left: 20%;
-    margin-right: 5%;
+    margin-right: 2%;
 }
 .blogdislike{
     display: inline block;
@@ -23,6 +23,11 @@
     color: white;
     font-weight: bold;
     margin-top: 100px;
-    margin-left: 5%;
-    margin-right: 20%;
+    margin-left: 20%;
+    margin-right: 2%;
+}
+.blogstats{
+    font-size: 14pt;
+    font-weight: bold;
+    color: darkorange;
 }
