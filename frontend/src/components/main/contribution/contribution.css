@@ -22,14 +22,13 @@
 }
 
 .upload1{
-    background-color: white;
     border-radius: 15px;
     padding: 1% 1% 1% 1%;
-    color: black;
     font-weight: bold;
     margin-right: 100px;
     margin-top: 10px;
     margin-bottom: 10px;
+
 }
 
 .upload1::-webkit-file-upload-button{

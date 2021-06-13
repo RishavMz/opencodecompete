@@ -38,7 +38,6 @@ class Blogview extends Component {
            },withCredentials: true  
         })
         .then((res) => {
-            console.log("tst"+res.data)
             this.setState({
                 title: res.data.title,
                 likes: res.data.likes,

@@ -28,3 +28,26 @@
     height: 100vh;
     padding-bottom: 250px;
 }
+
+.stats{
+    margin-top: 100px;
+    margin-left: 10%;
+    display: inline-block;
+    width: 20%;
+
+}
+
+.personalstats{
+    overflow-y: scroll;
+    height: 400px;
+
+}
+.plstats{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: grey;
+    font-size: 14pt;
+}
+a{
+    color: grey;
+}

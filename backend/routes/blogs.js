@@ -116,7 +116,13 @@ router.put("/disliked", async(req, res) => {
 });
 
 
-
+router.get("/contributedbyme", async(req, res) => {
+  await conn.query("SELECT * FROM BLOGS WHERE USERID = $1", [req.session.userID])
+  .then((resp) => {
+    res.send(resp.rows);
+  })
+  .catch(err => setImmediate(() => { throw err}))
+});
 
 
 module.exports = router;

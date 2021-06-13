@@ -206,5 +206,22 @@ router.get("/details/data/:slug", async(req, res) => {
   .catch(err => setImmediate(() => {   throw err }));
 });
 
+// Show all questions contributed
+router.get("/contributedbyme", async(req, res) =>{
+    await conn.query("SELECT * FROM QUESTIONS where STATUS = 1 AND USERID = $1 ;", [req.session.userID])
+    .then((response) => {
+        res.send(response.rows);
+    })
+    .catch(err => setImmediate(() => {   throw err }));
+});
+
+// Show all questions solved
+router.get("/solvedbyme", async(req, res) =>{
+  await conn.query("SELECT QUESTIONS.TITLE, QUESTIONS.ID FROM QUESTIONS, SOLVED where QUESTIONS.STATUS = 1 AND SOLVED.USERID = $1 AND QUESTIONS.ID = SOLVED.QUESTIONID ;", [req.session.userID])
+  .then((response) => {
+      res.send(response.rows);
+  })
+  .catch(err => setImmediate(() => {   throw err }));
+});
 
 module.exports = router;
