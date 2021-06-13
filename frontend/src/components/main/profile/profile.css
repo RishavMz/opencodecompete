@@ -21,4 +21,10 @@
     .profileinput{
         margin-left: 25%;
     }
+
+}
+
+.main{
+    height: 100vh;
+    padding-bottom: 250px;
 }

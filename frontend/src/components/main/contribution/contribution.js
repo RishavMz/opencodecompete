@@ -204,7 +204,7 @@ class Contribution extends Component {
             message = ""
         }
 
-        return ( <div className = "contribution">
+        return ( <div id = "theme" className = "contribution">
             <center>
                 {message}    
             </center>

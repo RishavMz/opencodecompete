@@ -26,7 +26,7 @@ class Questions extends Component {
     }
 
     render() { 
-        return ( <div className = "questionpane">
+        return ( <div id = "theme2" className = "questionpane">
             <center><h2 className = "topic">QUESTIONS</h2></center>
                 <div className = "content">
                 {this.state.questions.map((key) => {

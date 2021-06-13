@@ -8,8 +8,9 @@ class Navbar extends Component {
         super();
         this.handleLogOut = this.handleLogOut.bind(this);
         this.setCookie = this.setCookie.bind(this);
+        this.handleTheme = this.handleTheme.bind(this);
         this.state = {
-            
+            theme: "light"
         };
     }
 
@@ -21,6 +22,41 @@ class Navbar extends Component {
           expires = "; expires=" + date.toUTCString();
         document.cookie = name + "=" + (value || "") + expires + "; path=/;SameSite=Lax";
       }
+
+    handleTheme = (e) => {
+        var blogfeed = document.getElementById("theme1");
+        var all, i;
+        if(this.state.theme === "light"){
+            document.getElementById("main").classList.remove("lighttheme");
+            document.getElementById("main").classList.add("darktheme");
+            if(blogfeed){
+                document.getElementById("theme1").classList.remove("lighttheme");
+                document.getElementById("theme1").classList.add("darktheme");
+                document.getElementById("theme2").classList.remove("lighttheme");
+                document.getElementById("theme2").classList.add("darktheme");
+                all = document.getElementsByClassName("feedseperate");
+                for(i=0; i<all.length; i++){
+                    document.getElementsByClassName("feedseperate")[i].style.color = "white";
+                }
+            }
+            this.setState({theme: "dark"});
+        } else {
+            document.getElementById("main").classList.remove("darktheme");
+            document.getElementById("main").classList.add("lighttheme");
+            this.setState({theme: "light"})
+            if(blogfeed){
+                document.getElementById("theme1").classList.add("lighttheme");
+                document.getElementById("theme1").classList.remove("darktheme");
+                document.getElementById("theme2").classList.add("lighttheme");
+                document.getElementById("theme2").classList.remove("darktheme");
+                all = document.getElementsByClassName("feedseperate");
+                for(i=0; i<all.length; i++){
+                    document.getElementsByClassName("feedseperate")[i].style.color = "black";
+                }
+            }
+        }
+        console.log(this.state)
+    }  
 
 
     handleLogOut = async(key) => {
@@ -47,6 +83,12 @@ class Navbar extends Component {
 
     render() { 
         return ( <div className = "navbar">
+                <div  className = "theme">
+                <label className="switch">
+                    <input type="checkbox" onChange = {this.handleTheme}/>
+                    <span className="slider round"></span>
+                </label>
+                </div>
             <Link className = "navlink" to = "/login" onClick = {this.handleLogOut}>
                 Log Out
             </Link>

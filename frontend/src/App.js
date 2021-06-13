@@ -7,7 +7,7 @@ function App() {
   const loginCookie = document.cookie.substring(document.cookie.indexOf("login=200")+9);
 
   return (
-    <div className="App">
+    <div className="App" id="main">
       <Router>
         <Switch>
         <Route path = "/login" exact component = {Auth}>

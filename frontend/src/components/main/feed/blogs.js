@@ -27,7 +27,7 @@ class Blogs extends Component {
     }
 
     render() { 
-        return ( <div className = "blogpane">
+        return ( <div id = "theme1" className = "blogpane">
                 <center><h2 className = "topic">BLOGS</h2></center>
                 <div className = "content">
                 {this.state.blogs.map((key) => {

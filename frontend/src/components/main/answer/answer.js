@@ -14,7 +14,10 @@ class Answer extends Component {
             output: "",
             outputfile: "",
             outputfilename: "",
-            result: ""
+            result: "",
+            title: "",
+            correct: 0,
+            wrong: 0
         }
     }
 
@@ -43,6 +46,22 @@ class Answer extends Component {
         .then((res) => {
             this.setState({
                 output: res.data
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+
+        await axios.get("http://localhost:5000/questions/details/data/"+questionID , {
+            headers: {
+                'Content-Type': 'application/json'
+           },withCredentials: true  
+        })
+        .then((res) => {
+            this.setState({
+                title: res.data.title,
+                correct: res.data.correct,
+                wrong: res.data.wrong
             });
         })
         .catch((error) => {
@@ -128,8 +147,9 @@ class Answer extends Component {
             <center>
                 {message}    
             </center>
-
             <div className = "problemstatement">
+            <h2>{this.state.title}</h2>
+
                 <pre>
                     {this.state.statement}
                 </pre>
@@ -152,6 +172,9 @@ class Answer extends Component {
                         <input  className = "download" type='submit' value='Upload' />
                 </form>
             </div>
+            <div className = "questionstats"> Correct submissions: {this.state.correct}</div>
+            <div className = "questionstats"> Inorrect submissions: {this.state.wrong}</div>
+
             </center>    
 
         </div> );

@@ -20,3 +20,11 @@
     padding: 10px 10px 10px 10px;
     border-radius: 25px;
 }
+.questionstats{
+    display: inline-block;
+    color: darkolivegreen;
+    padding: 20px 20px 20px 20px;
+    margin: 20px 20px 20px 20px;
+    font-weight: bold;
+    border-radius: 20px;
+}

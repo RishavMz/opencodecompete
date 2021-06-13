@@ -13,10 +13,12 @@
 .upload{
     background-color: green;
     border-radius: 15px;
-    padding: 1% 1% 1% 1%;
+    padding: 15px 15px 15px 15px;
     color: white;
     font-weight: bold;
     font-size: 14pt;
+    outline: none;
+    border: 1px solid transparent;
 }
 
 .upload1{
@@ -26,6 +28,8 @@
     color: black;
     font-weight: bold;
     margin-right: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .upload1::-webkit-file-upload-button{

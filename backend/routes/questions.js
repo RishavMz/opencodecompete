@@ -197,7 +197,14 @@ router.get("/details/output/:slug" , async(req, res) => {
     .catch(err => setImmediate(() => {   throw err }));
 })
 
-
+// Send question data
+router.get("/details/data/:slug", async(req, res) => {
+  await conn.query("SELECT * FROM QUESTIONS WHERE ID = $1;", [req.params.slug])
+  .then((response) => {
+    res.send(response.rows[0])
+  })
+  .catch(err => setImmediate(() => {   throw err }));
+});
 
 
 module.exports = router;

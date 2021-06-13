@@ -77,7 +77,7 @@ class Profile extends Component {
             message = ""
         }
 
-        return ( <div className = "profile">
+        return ( <div id = "theme" className = "profile">
             <center>
                 {message}    
             </center>
