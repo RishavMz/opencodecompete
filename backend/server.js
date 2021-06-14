@@ -45,6 +45,7 @@ const authRoute = require("./routes/auth");
 const blogRoute = require("./routes/blogs");
 const questionRoute = require("./routes/questions");
 const profileRoute = require("./routes/profile");
+const commentRoute = require("./routes/comment");
 
 app.get("/", (req, res) =>{
     res.send("Random text go brr....");
@@ -56,6 +57,7 @@ app.use("/auth", authRoute);
 app.use("/blogs",blogRoute);
 app.use("/questions", questionRoute);
 app.use("/profiles", profileRoute);
+app.use("/comments", commentRoute);
 
 // ================= Server ===================
 

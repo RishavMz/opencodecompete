@@ -19,6 +19,8 @@
     font-size: 14pt;
     outline: none;
     border: 1px solid transparent;
+    box-shadow: 0px 0px 5px black;
+
 }
 
 .upload1{
@@ -41,6 +43,10 @@
 }
 .shift{
     margin-left: 30%;
+}
+
+.upload:active{
+    box-shadow: 0px 0px 1px grey;
 }
 
 @media screen and (max-width: 640px){

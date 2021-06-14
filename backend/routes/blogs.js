@@ -75,7 +75,7 @@ router.get("/viewone/:slug" , async(req, res) => {
           if(err){
             console.log(err);
           } else {
-            console.log("Sent problem statement successfully");
+            console.log("Sent blog file successfully");
           }
         })
     })

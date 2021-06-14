@@ -110,8 +110,6 @@ router.post("/add", async(req, res) => {
 
 // Handle correctly solved
 router.put("/correct", async(req, res) => {
-  console.log("Correct"+req.body.id)
-  console.log(req.session.userID , req.body.id)
   await conn.query("UPDATE QUESTIONS SET CORRECT = CORRECT+1 WHERE ID = $1",[req.body.id])
   .then(() => {
     res.send("Question correct submission")

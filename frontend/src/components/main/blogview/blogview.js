@@ -7,11 +7,16 @@ class Blogview extends Component {
         super();
         this.handleLike = this.handleLike.bind(this);
         this.handleDislike = this.handleDislike.bind(this);
+        this.handleComment = this.handleComment.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.state = {
             blog: "",
             title: "",
             likes: 0,
-            dislikes: 0
+            dislikes: 0,
+            comments: [],
+            commentcontent: "",
+            message: ""
         }
     }
 
@@ -26,6 +31,19 @@ class Blogview extends Component {
         .then((res) => {
             this.setState({
                 blog: res.data
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+        await axios.get("http://localhost:5000/comments/all/"+blogID , {
+            headers: {
+                'Content-Type': 'application/json'
+           },withCredentials: true  
+        })
+        .then((res) => {
+            this.setState({
+                comments: res.data
             });
         })
         .catch((error) => {
@@ -85,15 +103,70 @@ class Blogview extends Component {
         })
     }
 
+    handleComment = async(e) => {
+        e.preventDefault();
+        const blogID =  window.location.href.substring(window.location.href.lastIndexOf("/")+1);
+        await axios.post(`http://localhost:5000/comments/new`,
+        {
+            headers: {
+                 'Content-Type': 'application/json'
+            },
+            blogid:blogID,
+            content: this.state.commentcontent[0]
+        }, {withCredentials: true })
+        .then(() => {
+            this.setState({message : "Comment added successfully"})
+           })
+        .catch(error => {
+            console.error(error);
+        });
+
+        await axios.get("http://localhost:5000/comments/all/"+blogID , {
+            headers: {
+                'Content-Type': 'application/json'
+           },withCredentials: true  
+        })
+        .then((res) => {
+            this.setState({
+                comments: res.data
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
+    handleChange = (e) => {
+        this.setState({[e.target.name] : [e.target.value]})
+    }
 
     render(){
+        var message = "";
+        if(this.state.message !== ""){
+            message = <div className = "message">{this.state.message}  </div>  
+        } else {
+            message = ""
+        }
         return(<div className = "blogview">
+            <center>
+                {message}    
+            </center>
             <h2>{this.state.title}</h2>
             <pre>
                 {this.state.blog}
             </pre>
                 <button className = "bloglike" onClick = {this.handleLike}>Like</button>         <span className = "blogstats">{this.state.likes}</span>
                 <button className = "blogdislike" onClick = {this.handleDislike}>Dislike</button><span className = "blogstats">{this.state.dislikes}</span>
+       <div className = "comments">
+           <h2>COMMENTS</h2>
+           <form className = "addcomment" onSubmit = {this.handleComment}>
+               <textarea className = "carea" name = "commentcontent" onChange = {this.handleChange} value = {this.state.commentcontent}/>
+               <button className = "upload btnpost" type = "submit" >Post</button>
+           </form>
+           {this.state.comments.map((comm)=> {
+               return (<div key = {comm.id}  className = "commind">{comm.content}</div>)
+           })}
+       </div>
         </div>);
     }
 }
