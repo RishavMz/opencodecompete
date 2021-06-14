@@ -20,14 +20,13 @@ router.get("/remember", (req, res) => {
 
 // If browser closed but cookie set
 router.post("/remember", async (req, res) => {
-
     // Verify cookie data from the login cookie data stored in redis cache
     await redisClient.sismember("SESSIONS", req.body.username,  async(error, reply) => {
         if(reply === 1){
-            res.send("200LoggedIn");
                 await conn.query("SELECT ID FROM USERS WHERE USERNAME = $1 ", [req.body.username ])
-                .then(async (res) => {
-                    req.session.userID = res.rows[0].id;
+                .then(async (resp) => {
+                    req.session.userID = resp.rows[0].id;
+                    res.send("200LoggedIn");
                 })
                 .catch(err => setImmediate(() => {   throw err }));
         } else {
