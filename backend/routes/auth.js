@@ -57,7 +57,7 @@ router.post("/signup", async (req, res) => {
             .then(async() => {
                 await conn.query("SELECT ID FROM USERS WHERE EMAIL = $1", [req.body.email])
                 .then(async(response) => {
-                    await conn.query("INSERT INTO DATA(USERID, EMAIL, USERNAME, FIRSTNAME, LASTNAME) VALUES ($1, $2, $3, $4, $5);", [response.rows[0].id, req.body.email , req.body.username , "", "" ])
+                    await conn.query("INSERT INTO DATA(USERID, FIRSTNAME, LASTNAME) VALUES ($1, $2, $3);", [response.rows[0].id, "", "" ])
                     .then(() =>  {
                         res.status("201")
                         res.send('201Created Successfully');

@@ -90,7 +90,7 @@ router.put("/liked", async(req, res) => {
       await conn.query("UPDATE BLOGS SET LIKES = LIKES+1 WHERE ID = $1",[req.body.id])
       .then(() => {})
       .catch(err => setImmediate(() => {   throw err })); 
-      await conn.query("INSERT INTO BLOGLIKES (BLOGID, USERID) VALUES($1, $2)",[req.body.id, req.session.userID])
+      await conn.query("INSERT INTO BLOGLIKES (BLOGID, USERID, DATA) VALUES($1, $2, 1)",[req.body.id, req.session.userID])
       .then(() => {res.send("Like added to database")})
     .catch(err => setImmediate(() => {   throw err })); 
     }
@@ -101,18 +101,19 @@ router.put("/liked", async(req, res) => {
 
 // Handle dislike
 router.put("/disliked", async(req, res) => {
-  await conn.query("SELECT COUNT(*) FROM BLOGDISLIKES WHERE BLOGID = $1 AND USERID = $2",[req.body.id, req.session.userID])
+  await conn.query("SELECT COUNT(*) FROM BLOGLIKES WHERE BLOGID = $1 AND USERID = $2",[req.body.id, req.session.userID])
   .then(async(resp1) => {
     if(resp1.rows[0].count === '0'){
       await conn.query("UPDATE BLOGS SET DISLIKES = DISLIKES+1 WHERE ID = $1",[req.body.id])
       .then(() => {})
       .catch(err => setImmediate(() => {   throw err })); 
-      await conn.query("INSERT INTO BLOGDISLIKES (BLOGID, USERID) VALUES($1, $2)",[req.body.id, req.session.userID])
-      .then(() => {res.send("DisLike added to database")})
+      await conn.query("INSERT INTO BLOGLIKES (BLOGID, USERID, DATA) VALUES($1, $2, -1)",[req.body.id, req.session.userID])
+      .then(() => {res.send("Like added to database")})
     .catch(err => setImmediate(() => {   throw err })); 
     }
   })
   .catch(err => setImmediate(() => {   throw err }));
+  
 });
 
 

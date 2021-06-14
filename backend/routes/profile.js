@@ -4,7 +4,7 @@ const conn = require("../dbconn");
 
 router.get("/me", async(req, res) => {
     console.log(req.session.userID);
-    await conn.query("SELECT * FROM DATA WHERE USERID = $1",[req.session.userID])
+    await conn.query("SELECT * FROM DATA, USERS WHERE DATA.USERID = USERS.ID AND DATA.USERID = $1",[req.session.userID])
     .then((response) =>{
         res.send(response.rows[0]);
     })

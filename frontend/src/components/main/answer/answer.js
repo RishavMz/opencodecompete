@@ -155,17 +155,17 @@ class Answer extends Component {
                 </pre>
             </div>
             <center>
-            <div class = "inputtestcase">
+            <div className = "inputtestcase">
                 <h2>Input File</h2>
 
                 <form onSubmit = {this.handleInputTestcase}>
                     <button type = "submit" className = "download" name= "submit">Download</button>
                 </form>
             </div>
-            <div class = "inputtestcase">
+            <div className = "inputtestcase">
                  <h2>Upload output File</h2>
                  <form onSubmit={this.handleCheck} >
-                    <input className = "upload1" type="file" name="outputfile" required={true} onChange={this.outputHandler} placeholder="Upload output file" />
+                    <input className = "upload1 uploadout" type="file" name="outputfile" required={true} onChange={this.outputHandler} placeholder="Upload output file" />
                     <label >
                         {this.state.outputfilename}
                     </label>

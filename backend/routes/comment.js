@@ -15,7 +15,7 @@ router.post("/new", async(req, res) =>{
 });
 
 router.get("/all/:slug", async(req, res) => {
-    await conn.query("SELECT * FROM COMMENTS WHERE BLOGID = $1 ORDER BY ID DESC;", [req.params.slug])
+    await conn.query("SELECT * FROM COMMENTS, USERS WHERE USERS.ID = COMMENTS.USERID AND COMMENTS.BLOGID = $1 ORDER BY COMMENTS.ID DESC;", [req.params.slug])
     .then((resp) => res.send(resp.rows))
     .catch(err => setImmediate(() => {throw err}))
     

@@ -164,7 +164,10 @@ class Blogview extends Component {
                <button className = "upload btnpost" type = "submit" >Post</button>
            </form>
            {this.state.comments.map((comm)=> {
-               return (<div key = {comm.id}  className = "commind">{comm.content}</div>)
+               return (<div key = {comm.id}  className = "commind">
+                   <h3>{comm.username}</h3>
+                   {comm.content}
+                   </div>)
            })}
        </div>
         </div>);
