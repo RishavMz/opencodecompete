@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+
+    redis:
+        image: redis
+        container_name: redis_cache
+        command:
+            redis-server
+        ports:
+            - 6379:6379          
+    
+    postgres:
+        image: postgres
+        container_name: postgres_db
+        env_file: 
+            - database.env
+        volumes: 
+            - database-data:/var/lib/postgresql/data/
+        ports: 
+            - 5432:5432   
+
+    nodeserver:
+
+        build: ./backend
+        image: node_server
+        container_name: node_server1
+        ports: 
+            - 5000:5000
+        links:
+            - redis
+            - postgres
+        depends_on: 
+            - redis
+            - postgres
+        environment:
+            CORS_ORIGIN: http://localhost:3000
+            PORT: 5000
+            SECRETKEY: ThisIsASecretKey
+            DB_USERNAME: postgres
+            DB_PASSWORD: root
+            DB_HOST: postgres
+            REDIS_URL: redis://redis:6379  
+                             
+    app: 
+        build: ./frontend
+        image: node_app
+        container_name: node_app1
+        ports:
+            - 3000:3000        
+                
+volumes: 
+    database-data:   

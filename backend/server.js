@@ -47,6 +47,9 @@ const questionRoute = require("./routes/questions");
 const profileRoute = require("./routes/profile");
 const commentRoute = require("./routes/comment");
 
+app.get("/", (req, res) => {
+  res.send("Server Working. Now get to handle requests")
+})
 
 app.use("/auth", authRoute);
 app.use("/blogs",blogRoute);
