@@ -12,6 +12,21 @@ class Feed extends Component {
         };
     }
     render() { 
+        setTimeout(()=>{
+            var theme = document.body.style.backgroundColor;
+            var all = document.getElementsByClassName("feedseperate");
+            var i = 0;
+            if(theme === "white"){
+                    for(i=0; i<all.length; i++){
+                        document.getElementsByClassName("feedseperate")[i].style.color = "black";
+                    }
+                } else {
+                    for(i=0; i<all.length; i++){
+                        document.getElementsByClassName("feedseperate")[i].style.color = "white";
+                    }
+                }
+        }, 40);
+        
         return ( <div className = "feed">
             <Questions/>
             <Blogs />

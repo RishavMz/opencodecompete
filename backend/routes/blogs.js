@@ -28,7 +28,6 @@ var blogStorage = multer.diskStorage({
 
 // Route to get all blog files (for testing purpose)
 router.get("/all", async(req, res) =>{
-  console.log(req.session.userID);
     await conn.query("SELECT * FROM BLOGS ORDER BY LIKES DESC;")
     .then((response) => {
         res.send(response.rows);

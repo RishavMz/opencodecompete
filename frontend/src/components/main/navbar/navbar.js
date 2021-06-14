@@ -29,6 +29,7 @@ class Navbar extends Component {
         if(this.state.theme === "light"){
             document.getElementById("main").classList.remove("lighttheme");
             document.getElementById("main").classList.add("darktheme");
+            document.body.style.backgroundColor = "#282c34";
             if(blogfeed){
                 document.getElementById("theme1").classList.remove("lighttheme");
                 document.getElementById("theme1").classList.add("darktheme");
@@ -43,6 +44,7 @@ class Navbar extends Component {
         } else {
             document.getElementById("main").classList.remove("darktheme");
             document.getElementById("main").classList.add("lighttheme");
+            document.body.style.backgroundColor = "white";
             this.setState({theme: "light"})
             if(blogfeed){
                 document.getElementById("theme1").classList.add("lighttheme");
@@ -57,7 +59,6 @@ class Navbar extends Component {
         }
         console.log(this.state)
     }  
-
 
     handleLogOut = async(key) => {
         key.preventDefault();
@@ -98,7 +99,7 @@ class Navbar extends Component {
             <Link className = "navlink" to = "/contribution">
                 Contribute
             </Link>
-            <Link className = "navlink" to = "/">
+            <Link className = "navlink" to = "/" >
                 Home
             </Link>
         </div>);

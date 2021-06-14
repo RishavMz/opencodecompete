@@ -9,7 +9,11 @@ class NotFound extends Component {
     }
     render() { 
         return ( <div className = "notfound">
-                418 Found aa teapot
+                <center>
+                    <h1>404 NOT FOUND</h1>
+                    <br/><br/>
+                    <h2>Please check your URL</h2>
+                </center>
             </div> );
     }
 }
