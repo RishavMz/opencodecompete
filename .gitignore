@@ -1,12 +1,12 @@
 node_modules
 
 .env
-assets/drop.sql
+documentation/drop.sql
 
 
 # Uploaded files 
-backend/data/blogs/*.txt
-backend/data/questions/statement/*.txt
-backend/data/questions/input/*.txt
-backend/data/questions/output/*.txt
+data/blogs/*.txt
+data/questions/statement/*.txt
+data/questions/input/*.txt
+data/questions/output/*.txt
 

@@ -14,7 +14,7 @@ var questiontitle = "";
 // Configuring storage location for uploading problem statement file
 var questionStorage = multer.diskStorage({
   destination: function(req, file, cb) {
-      cb(null, __dirname+'../../data/questions/statement');
+      cb(null, __dirname+'../../../data/questions/statement');
    },
   filename: function (req, file, cb) {
       uploadtime = Date.now();
@@ -27,7 +27,7 @@ var questionUpload = multer({ storage: questionStorage });
 // Configuring storage location for uploading file containing input testcases
 var inputStorage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, __dirname+'../../data/questions/input');
+        cb(null, __dirname+'../../../data/questions/input');
      },
     filename: function (req, file, cb) {
         uploadtime = Date.now();
@@ -40,7 +40,7 @@ var inputStorage = multer.diskStorage({
 // Configuring storage location for uploading file containing correct output to corresponging test cases
   var outputStorage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, __dirname+'../../data/questions/output');
+        cb(null, __dirname+'../../../data/questions/output');
      },
     filename: function (req, file, cb) {
         uploadtime = Date.now();
@@ -153,7 +153,7 @@ router.get("/details/statement/:slug" , async(req, res) => {
   await conn.query("SELECT * FROM QUESTIONS WHERE ID = $1;", [req.params.slug])
     .then((response) => {
       var options = {
-        root: path.join(__dirname+"/../data/questions/statement/")
+        root: path.join(__dirname+"/../../data/questions/statement/")
       }
       var filename = response.rows[0].statement;
         res.sendFile(filename, options, (err)=>{
@@ -170,7 +170,7 @@ router.get("/details/statement/:slug" , async(req, res) => {
 router.get("/details/input/:slug" , async(req, res) => {
   await conn.query("SELECT * FROM QUESTIONS WHERE ID = $1;", [req.params.slug])
     .then((response) => {
-      var file = path.join(__dirname+"/../data/questions/input/"+response.rows[0].input);
+      var file = path.join(__dirname+"/../../data/questions/input/"+response.rows[0].input);
         res.download(file);
     })
     .catch(err => setImmediate(() => {   throw err }));
@@ -181,7 +181,7 @@ router.get("/details/output/:slug" , async(req, res) => {
   await conn.query("SELECT * FROM QUESTIONS WHERE ID = $1;", [req.params.slug])
     .then((response) => {
       var options = {
-        root: path.join(__dirname+"/../data/questions/output/")
+        root: path.join(__dirname+"/../../data/questions/output/")
       }
       var filename = response.rows[0].output;
         res.sendFile(filename, options, (err)=>{

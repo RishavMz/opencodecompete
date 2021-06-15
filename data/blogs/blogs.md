@@ -1,0 +1,1 @@
+This folder contains all blogs uploaded to web application

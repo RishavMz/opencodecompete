@@ -14,7 +14,7 @@ var title = "";
 // Configuring storage location for uploading blog file
 var blogStorage = multer.diskStorage({
   destination: function(req, file, cb) {
-      cb(null, __dirname+'../../data/blogs');
+      cb(null, __dirname+'../../../data/blogs');
    },
   filename: function (req, file, cb) {
       uploadtime = Date.now();
@@ -67,7 +67,7 @@ router.get("/viewone/:slug" , async(req, res) => {
   await conn.query("SELECT * FROM BLOGS WHERE ID = $1;", [req.params.slug])
     .then((response) => {
       var options = {
-        root: path.join(__dirname+"/../data/blogs/")
+        root: path.join(__dirname+"/../../data/blogs/")
       }
       var filename = response.rows[0].content;
         res.sendFile(filename, options, (err)=>{

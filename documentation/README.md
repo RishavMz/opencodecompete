@@ -183,6 +183,9 @@
 
 * server.js - Main file
 
+#
+#
+
 ## Frontend structure:
 
 * auth  - Rendered when the user is not logged in. Handles signup/login operations
