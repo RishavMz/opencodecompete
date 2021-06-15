@@ -1,8 +1,6 @@
 
 ## Database schema
 
-<img src = "./schema.png"/>
-
 
 ### USERS
 > Contains user login credentials
@@ -182,9 +180,6 @@
 * dbconn.js - Helper file to connect with the postgresql database
 
 * server.js - Main file
-
-#
-#
 
 ## Frontend structure:
 

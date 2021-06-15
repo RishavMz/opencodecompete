@@ -118,7 +118,7 @@ router.put("/correct", async(req, res) => {
   await conn.query("SELECT COUNT(*) FROM SOLVED WHERE USERID = $1 AND QUESTIONID = $2",[req.session.userID,req.body.id])
   .then(async(response) => {
     if(response.rows[0].count === '0'){
-      await conn.query("INSERT INTO SOLVED (USERID, QUESTIONID,SCORE) VALUES ($1, $2, 1)",[req.session.userID,req.body.id])
+      await conn.query("INSERT INTO SOLVED (USERID, QUESTIONID) VALUES ($1, $2)",[req.session.userID,req.body.id])
       .then(() => console.log("Updated solved table"))
       .catch(err => setImmediate(() => {   throw err })); 
       await conn.query("UPDATE DATA SET SCORE = SCORE+1 WHERE USERID = $1",[req.session.userID])

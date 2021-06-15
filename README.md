@@ -2,12 +2,14 @@
 
 A web application where users can solve programming questions and also contribute their own questions.
 
-## Technology used:
+## ARCHITECTURE
 
-- Frontend : React
-- Backend  : express
-- Database : postgreSQL
-- Cache    : redis
+<img src = "./documentation/architecture.png"/>
+
+
+## Database schema
+
+<img src = "./documentation/schema.png"/>
 
 
 # How to setup on your own system:
@@ -35,10 +37,11 @@ A web application where users can solve programming questions and also contribut
     ```
     CORS_ORIGIN=http://localhost:3000
     PORT=5000
-    SECRETKEY=<Some Secret Key>
-    DB_USERNAME=<Your postgres username>
-    DB_PASSWORD=<Your postgres password>
-    DB_HOST = localhost
+    SECRETKEY=    ( ENTER )
+    DB_USERNAME=  ( ENTER )
+    DB_PASSWORD=  ( ENTER )
+    DB_HOST= localhost
+    REDIS_url=http://localhost:6379
     ```
 
 ## Start application
