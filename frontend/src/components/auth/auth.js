@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Login from './login/login';
 import Signup from './signup/signup';
+import Welcome from './welcome/welcome';
 
 class Auth extends Component {
     constructor(props){
@@ -37,6 +38,7 @@ class Auth extends Component {
                 {message}    
             </center>  
             <Signup message = {this.messagesender.bind(this)} />
+            <Welcome/>
 
         </div> );
     }

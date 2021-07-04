@@ -1,0 +1,38 @@
+.welcome{
+    position: absolute;
+    top: 200px;
+    right: 200px;
+}
+.earth
+{
+    height: 300px;
+    width: 300px;
+    position: relative;
+    animation: move 60s infinite;
+}
+.astronaut{
+    height: 150px;
+    width: auto;
+    position: relative;
+    animation: hover 10s infinite;
+}
+@keyframes hover {
+    0%  {top: 0px;}
+    50% {top: 50px;}
+    100%{top: 0px;}
+}
+@keyframes move {
+    0%  {left: 0px;}
+    50% {left: 100px;}
+    100% {left: 0px;}
+
+}
+@media screen and (max-width: 1200px){
+    .earth{
+        display: none;
+    }
+    .astronaut{
+        display: none;
+    }
+    
+}
