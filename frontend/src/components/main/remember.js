@@ -7,14 +7,19 @@ import NotFound from './notfound/notfound';
 import Answer from './answer/answer';
 import Blogview from './blogview/blogview';
 import {BrowserRouter as Router , Switch , Route} from 'react-router-dom'
+import Footer from "./footer/footer";
 import './main.css';
 import axios from 'axios'
+import pikachu from './pikachu.gif';
+import grass from './grass.png';
 
 
 class Main extends Component {
     constructor(){
         super();
-        this.state = {}
+        this.state = {
+            grass:[]
+        }
         this.setCookie = this.setCookie.bind(this);
     }
 
@@ -26,6 +31,12 @@ class Main extends Component {
         document.cookie = name + "=" + (value || "") + expires + "; path=/;SameSite=Lax";
       }
     async componentDidMount(){
+
+        var grasses = window.screen.width/100;
+        var gras = [];
+        for(var i=0; i<grasses; i++)
+            gras.push(i);
+        this.setState({grass: gras});
         // That mysterious bug
         await axios.post(`http://localhost:5000/auth/checklogout`,{
             headers: {
@@ -58,7 +69,17 @@ class Main extends Component {
         })
     }
     render() { 
+        
         return ( <div className = "main">
+            <div className = "banner">
+                <div className="pokeball1"/>
+                <div className="pokeball2"/>
+
+
+            <img className="pikachu" src={pikachu} alt="pikachu"/>
+            {this.state.grass.map((g)=> {return(<img key={g} className= "grass" src={grass} alt="grass"/>)})}
+            </div>
+            
             <Router>
                 <Navbar/>
                 <Switch>
@@ -70,7 +91,7 @@ class Main extends Component {
                     <Route path="/" component={NotFound} />
                 </Switch>
             </Router>
-
+            <Footer/>
         </div> );
     }
 }

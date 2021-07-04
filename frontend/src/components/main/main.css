@@ -1,18 +1,79 @@
 .main{
-    padding-top: 200px;
     margin-top: 0px;
+}
+.banner{
+    height: 400px;
+    width: 100%;
+    background-color: #282c34;
+    overflow: hidden;
 }
 @media screen and (max-width: 640px) {
     .main{
-        margin-top: 400px;
+        margin-top: 0px;
     }
 }
 
-.darktheme{
-    background-color: #282c34;
-    color: white;
-}
 .lighttheme{
     background-color: white;
     color: black;
+}
+.pikachu{
+    height: 50px;
+    width: auto;
+    margin-top: 350px;
+    position: absolute;
+    animation: goright 10s infinite;
+    z-index: 100;
+}
+.grass{
+    margin-top: 300px;
+    width: 100px;
+    height: auto;
+    display: inline-block;
+    overflow: hidden;
+    z-index: 101;
+}
+
+
+@keyframes goright {
+    from {left: -5%;}
+    to {left: 94% }
+}
+.pokeball1{
+    height: 50px;
+    width: 100px;
+    z-index: 200;
+    background-color:red;
+    border-radius: 100px;
+    position: absolute;
+    top:  320px;
+    right: 15px;
+    border-top-left-radius: 100px ;
+    border-top-right-radius: 100px ;
+    border-bottom-left-radius: 100px ;
+    border-bottom-right-radius:100px ;
+    border-bottom: 50px solid white;
+    animation: 2s linear infinite rotate;
+
+
+}
+@keyframes rotate {
+    0%{ transform: rotate(0deg);}
+    25%{ transform: rotate(-25deg);}
+    50%{ transform: rotate(0deg);}
+    75%{ transform: rotate(25deg);}
+    100%{ transform: rotate(0deg);}
+
+  }
+.pokeball2{
+    height: 20px;
+    width: 20px;
+    z-index: 200;
+    background-color:white;
+    border: 3px solid black;
+    border-radius: 100px;
+    position: absolute;
+    top:  360px;
+    right: 55px;
+    z-index: 205;
 }
