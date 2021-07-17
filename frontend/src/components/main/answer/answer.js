@@ -3,6 +3,8 @@ import FileDownload from 'js-file-download';
 import axios from 'axios';
 import './answer.css'
 
+const HOST = process.env.REACT_APP_APIHOST;
+
 class Answer extends Component {
     constructor(){
         super();
@@ -24,7 +26,7 @@ class Answer extends Component {
     async componentDidMount()
     {
         const questionID = window.location.href.substring(window.location.href.lastIndexOf("/")+1);
-        await axios.get("http://localhost:5000/questions/details/statement/"+questionID , {
+        await axios.get(`${HOST}/questions/details/statement/${questionID}`, {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -38,7 +40,7 @@ class Answer extends Component {
             console.error(error);
         });
 
-        await axios.get("http://localhost:5000/questions/details/output/"+questionID , {
+        await axios.get(`${HOST}/questions/details/output/${questionID}` , {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -52,7 +54,7 @@ class Answer extends Component {
             console.error(error);
         })
 
-        await axios.get("http://localhost:5000/questions/details/data/"+questionID , {
+        await axios.get(`${HOST}/questions/details/data/${questionID}` , {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -73,7 +75,7 @@ class Answer extends Component {
     handleInputTestcase = async(key) => {
         key.preventDefault();
         const questionID = window.location.href.substring(window.location.href.lastIndexOf("/")+1);
-        await axios.get("http://localhost:5000/questions/details/input/"+questionID , {
+        await axios.get(`${HOST}/questions/details/input/${questionID}` , {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  ,
@@ -106,7 +108,7 @@ class Answer extends Component {
             data = read.result;
             if(data === this.state.output){
                 this.setState({result:"correct"});
-                await axios.put(`http://localhost:5000/questions/correct`,
+                await axios.put(`${HOST}/questions/correct`,
                 {
                     headers: {
                         'Content-Type': 'application/json'
@@ -120,7 +122,7 @@ class Answer extends Component {
                 })
             } else {
                 this.setState({result:"wrong"});
-                await axios.put(`http://localhost:5000/questions/wrong`,
+                await axios.put(`${HOST}/questions/wrong`,
                 {
                     headers: {
                         'Content-Type': 'application/json'

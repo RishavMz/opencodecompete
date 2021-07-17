@@ -3,6 +3,8 @@ import axios from 'axios';
 import './profile.css';
 import {Link} from 'react-router-dom'
 
+const HOST = process.env.REACT_APP_APIHOST;
+
 class Profile extends Component {
     constructor(){
         super();
@@ -24,7 +26,7 @@ class Profile extends Component {
 
     async componentDidMount(){
 
-        await axios.get("http://localhost:5000/questions/contributedbyme", {
+        await axios.get(`${HOST}/questions/contributedbyme`, {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -39,7 +41,7 @@ class Profile extends Component {
         });
         
         
-        await axios.get("http://localhost:5000/questions/solvedbyme", {
+        await axios.get(`${HOST}/questions/solvedbyme`, {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -53,7 +55,7 @@ class Profile extends Component {
             console.error(error);
         });
 
-        await axios.get("http://localhost:5000/blogs/contributedbyme", {
+        await axios.get(`${HOST}/blogs/contributedbyme`, {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -68,7 +70,7 @@ class Profile extends Component {
         });
 
 
-        await axios.get(`http://localhost:5000/profiles/me`,{
+        await axios.get(`${HOST}/profiles/me`,{
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -92,7 +94,7 @@ class Profile extends Component {
     handleUpdate = async(key) => {
         key.preventDefault();
 
-        await axios.put(`http://localhost:5000/profiles/update`,
+        await axios.put(`${HOST}/profiles/update`,
         {
             headers: {
                  'Content-Type': 'application/json'

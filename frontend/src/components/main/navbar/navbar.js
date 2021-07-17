@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import './navbar.css'
-;
+import './navbar.css';
+
+const HOST = process.env.REACT_APP_APIHOST;
+
 class Navbar extends Component {
     constructor(){
         super();
@@ -26,7 +28,7 @@ class Navbar extends Component {
         key.preventDefault();
 
         // Try to Log out 
-        await axios.post(`http://localhost:5000/auth/logout`,{
+        await axios.post(`${HOST}/auth/logout`,{
             headers: {
                 'Content-Type': 'application/json'
            } 

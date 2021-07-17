@@ -4,6 +4,8 @@ import Loader from './loader/loader';
 import './main.css';
 //import axios from 'axios'
 
+//const HOST = process.env.REACT_APP_APIHOST;
+
 
 class Maindata extends Component {
     constructor(){

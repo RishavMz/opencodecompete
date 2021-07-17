@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './blogview.css';
 
+const HOST = process.env.REACT_APP_APIHOST;
+
 class Blogview extends Component {
     constructor(){
         super();
@@ -23,7 +25,7 @@ class Blogview extends Component {
     async componentDidMount()
     {
         const blogID = window.location.href.substring(window.location.href.lastIndexOf("/")+1);
-        await axios.get("http://localhost:5000/blogs/viewone/"+blogID , {
+        await axios.get(`${HOST}/blogs/viewone/${blogID}` , {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -36,7 +38,7 @@ class Blogview extends Component {
         .catch((error) => {
             console.error(error);
         });
-        await axios.get("http://localhost:5000/comments/all/"+blogID , {
+        await axios.get(`${HOST}/comments/all/${blogID}` , {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -50,7 +52,7 @@ class Blogview extends Component {
             console.error(error);
         });
 
-        await axios.get("http://localhost:5000/blogs/details/"+blogID, {
+        await axios.get(`${HOST}/blogs/details/${blogID}`, {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
@@ -70,7 +72,7 @@ class Blogview extends Component {
     handleLike = async(e) => {
         e.preventDefault();
         const blogID = window.location.href.substring(window.location.href.lastIndexOf("/")+1);
-        await axios.put(`http://localhost:5000/blogs/liked`,{
+        await axios.put(`${HOST}/blogs/liked`,{
                 headers: {
                     'Content-Type': 'application/json'
                },
@@ -88,7 +90,7 @@ class Blogview extends Component {
     handleDislike = async(e) => {
         e.preventDefault();
         const blogID = window.location.href.substring(window.location.href.lastIndexOf("/")+1);
-        await axios.put(`http://localhost:5000/blogs/disliked`,{
+        await axios.put(`${HOST}/blogs/disliked`,{
                 headers: {
                     'Content-Type': 'application/json'
                },
@@ -106,7 +108,7 @@ class Blogview extends Component {
     handleComment = async(e) => {
         e.preventDefault();
         const blogID =  window.location.href.substring(window.location.href.lastIndexOf("/")+1);
-        await axios.post(`http://localhost:5000/comments/new`,
+        await axios.post(`${HOST}/comments/new`,
         {
             headers: {
                  'Content-Type': 'application/json'
@@ -121,7 +123,7 @@ class Blogview extends Component {
             console.error(error);
         });
 
-        await axios.get("http://localhost:5000/comments/all/"+blogID , {
+        await axios.get(`${HOST}/comments/all/${blogID}` , {
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  

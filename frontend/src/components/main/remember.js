@@ -13,6 +13,7 @@ import axios from 'axios'
 import pikachu from './pikachu.gif';
 import grass from './grass.png';
 
+const HOST = process.env.REACT_APP_APIHOST;
 
 class Main extends Component {
     constructor(){
@@ -38,7 +39,7 @@ class Main extends Component {
             gras.push(i);
         this.setState({grass: gras});
         // That mysterious bug
-        await axios.post(`http://localhost:5000/auth/checklogout`,{
+        await axios.post(`${HOST}/auth/checklogout`,{
             headers: {
                 'Content-Type': 'application/json'
            } 
@@ -46,7 +47,7 @@ class Main extends Component {
         .then(async(resp) => {
             if(resp.data.data === undefined ){
                 alert("Session Lost Mysteriously")
-                await axios.post(`http://localhost:5000/auth/logout`,{
+                await axios.post(`${HOST}/auth/logout`,{
                     headers: {
                         'Content-Type': 'application/json'
                    } 

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './signup.css';
 import axios from "axios";
 
+const HOST = process.env.REACT_APP_APIHOST;
+
 class Signup extends Component {
     constructor() {
         super();
@@ -34,7 +36,7 @@ class Signup extends Component {
     }
 
     // Signing up
-    axios.post(`http://localhost:5000/auth/signup`,
+    axios.post(`${HOST}/auth/signup`,
         {
             headers: {
                  'Content-Type': 'application/json'

@@ -3,6 +3,8 @@ import './feed.js';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
+const HOST = process.env.REACT_APP_APIHOST;
+
 class Questions extends Component {
     constructor(){
         super();
@@ -12,7 +14,7 @@ class Questions extends Component {
     }
     async componentDidMount(){
 
-    await axios.get(`http://localhost:5000/questions/all`,{
+    await axios.get(`${HOST}/questions/all`,{
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  

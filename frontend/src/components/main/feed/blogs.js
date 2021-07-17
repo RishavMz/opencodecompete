@@ -3,6 +3,8 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import './feed.css';
 
+const HOST = process.env.REACT_APP_APIHOST;
+
 class Blogs extends Component {
     constructor(){
         super();
@@ -12,7 +14,7 @@ class Blogs extends Component {
     }
 
     async componentDidMount() {
-        await axios.get(`http://localhost:5000/blogs/all`,{
+        await axios.get(`${HOST}/blogs/all`,{
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
