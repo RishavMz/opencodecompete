@@ -32,7 +32,7 @@ class Login extends Component {
     async componentDidMount(){
 
         // Check if session available
-        await axios.get(`${HOST}auth/remember`,{
+        await axios.get(`${HOST}/auth/remember`,{
             headers: {
                 'Content-Type': 'application/json'
            },withCredentials: true  
