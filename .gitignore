@@ -2,7 +2,7 @@ node_modules
 
 .env
 documentation/drop.sql
-
+test.html
 
 # Uploaded files 
 data/blogs/*.txt

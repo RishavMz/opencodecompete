@@ -37,9 +37,9 @@ const initialize = async() => {
         .then(() => console.log("Successfully initialized BLOGLIKES table"))
         .catch(err => setImmediate(() => {   throw err }));   
 
-    await conn.query("CREATE TABLE IF NOT EXISTS COMMENTLIKES (ID SERIAL PRIMARY KEY , USERID INTEGER , COMMENTID INTEGER , DATA INTEGER,  FOREIGN KEY(USERID) REFERENCES USERS(ID) , FOREIGN KEY(COMMENTID) REFERENCES COMMENTS(ID));")
+    /*await conn.query("CREATE TABLE IF NOT EXISTS COMMENTLIKES (ID SERIAL PRIMARY KEY , USERID INTEGER , COMMENTID INTEGER , DATA INTEGER,  FOREIGN KEY(USERID) REFERENCES USERS(ID) , FOREIGN KEY(COMMENTID) REFERENCES COMMENTS(ID));")
         .then(() => console.log("Successfully initialized COMMENTLIKESLIKES table"))
-        .catch(err => setImmediate(() => {   throw err }));       
+        .catch(err => setImmediate(() => {   throw err })); */      
 
 
 }
