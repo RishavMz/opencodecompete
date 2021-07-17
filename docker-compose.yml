@@ -2,13 +2,13 @@ version: "3.9"
 
 services:
 
-    redis:
-        image: redis
-        container_name: redis_cache
-        command:
-            redis-server
-        ports:
-            - 6379:6379          
+    #redis:
+    #    image: redis
+    #    container_name: redis_cache
+    #    command:
+    #        redis-server
+    #    ports:
+    #        - 6379:6379          
     
     postgres:
         image: postgres
@@ -28,10 +28,10 @@ services:
         ports: 
             - 5000:5000
         links:
-            - redis
+        #    - redis
             - postgres
         depends_on: 
-            - redis
+        #    - redis
             - postgres
         environment:
             CORS_ORIGIN: http://localhost:3000
@@ -40,7 +40,7 @@ services:
             DB_USERNAME: postgres
             DB_PASSWORD: root
             DB_HOST: postgres
-            REDIS_URL: redis://redis:6379  
+        #    REDIS_URL: redis://redis:6379  
                              
     app: 
         build: ./frontend

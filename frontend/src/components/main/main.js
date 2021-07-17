@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Main from "./remember";
 import Loader from './loader/loader';
 import './main.css';
-import axios from 'axios'
+//import axios from 'axios'
 
 
 class Maindata extends Component {
@@ -15,7 +15,10 @@ class Maindata extends Component {
 
     async componentDidMount(){
         const loginCookie = document.cookie.substring(document.cookie.indexOf("login=200")+9);
-        await axios.post(`http://localhost:5000/auth/remember`,
+        if(loginCookie){
+            setTimeout(this.setState({data: 1}), 1000);
+        }
+/*        await axios.post(`http://localhost:5000/auth/remember`,
         {
             headers: {
                'Content-Type': 'application/json'
@@ -36,7 +39,7 @@ class Maindata extends Component {
             .catch((error) => {
                  console.error(error);
             });
-
+*/
     }
     render() { 
         return ( <div className = "main">

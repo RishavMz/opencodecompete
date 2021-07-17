@@ -2,11 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const uuid = require("uuid").v4;
 const session = require("express-session");
-const redis = require("ioredis");
+//const redis = require("ioredis");
 require("dotenv").config();
 const bodyParser = require("body-parser");
-const redisClient = new redis(process.env.REDIS_URL);
-const redisStore = require('connect-redis')(session);
+//const redisClient = new redis(process.env.REDIS_URL);
+//const redisStore = require('connect-redis')(session);
 
 
 
@@ -24,9 +24,9 @@ app.use(cors({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-redisClient.on('error', (err) => {
+/*redisClient.on('error', (err) => {
     console.log('Redis error: ', err);
-  });
+  });*/
   
 app.use(session({
     genid: (req) =>{
@@ -34,9 +34,9 @@ app.use(session({
     secret: process.env.SECRETKEY,
     resave: false,
     saveUninitialized: true,
-    store: new redisStore({
+    /*store: new redisStore({
         client: redisClient, 
-        ttl: 86400 }),
+        ttl: 86400 }),*/
   }));
 
 // ================= Routes ===================

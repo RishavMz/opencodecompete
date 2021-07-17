@@ -1,8 +1,8 @@
 const express = require("express");
-const redis = require("ioredis");
+//const redis = require("ioredis");
 const router = express.Router();
 const conn = require("../dbconn");
-const redisClient = new redis(process.env.REDIS_URL);
+//const redisClient = new redis(process.env.REDIS_URL);
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -19,7 +19,7 @@ router.get("/remember", (req, res) => {
 });
 
 // If browser closed but cookie set
-router.post("/remember", async (req, res) => {
+/*router.post("/remember", async (req, res) => {
     // Verify cookie data from the login cookie data stored in redis cache
     await redisClient.sismember("SESSIONS", req.body.username,  async(error, reply) => {
         if(reply === 1){
@@ -36,7 +36,7 @@ router.post("/remember", async (req, res) => {
             console.log(error);
         }
     });
-});
+});*/
 
 //========================= Sign UP ================================
 
@@ -112,9 +112,9 @@ router.post("/login", async (req, res) => {
             req.session.username = req.body.username;
 
                 // Store data in redis cache for verifying cookies
-                await redisClient.sadd("SESSIONS",req.session.username, (error) =>{
+                /*await redisClient.sadd("SESSIONS",req.session.username, (error) =>{
                     if(error) {console.log(error)}
-                });
+                });*/
             res.send("200"+req.session.username);
 
       } else if(auth === 1){
@@ -136,7 +136,7 @@ router.post("/logout", async(req, res) => {
     if(req.session.username){
 
         // Check if cookie data for current user present in cache
-        await redisClient.sismember("SESSIONS", req.session.username , (error, reply) =>{
+        /*await redisClient.sismember("SESSIONS", req.session.username , (error, reply) =>{
             found =  reply;
             if(error){ console.log(error)}
         });
@@ -146,7 +146,7 @@ router.post("/logout", async(req, res) => {
             redisClient.srem("SESSIONS", req.session.username, (error) =>{
                 if(error){ console.log(error)}
             });
-        } 
+        } */
     }
     console.log("Logged out");
 

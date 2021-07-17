@@ -1,6 +1,7 @@
 node_modules
 
 .env
+heroku.env
 documentation/drop.sql
 test.html
 
